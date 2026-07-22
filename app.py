@@ -7,7 +7,7 @@ import pandas as pd
 import streamlit as st
 
 st.set_page_config(
-    page_title="Inteligência do Tênis de Mesa",
+    page_title="Inteligência do Tênis de Mesa — V1.2",
     page_icon="🏓",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -264,6 +264,90 @@ def gerar_insights_jogador(d: pd.DataFrame) -> list[tuple[str, str]]:
     return insights
 
 
+def ultima_situacao_jogador(d: pd.DataFrame, fechamento: pd.Timestamp) -> dict:
+    if d.empty:
+        return {
+            "ultima": None, "jogos_ultimo_dia": 0, "vitorias_ultimo_dia": 0,
+            "derrotas_ultimo_dia": 0, "tempo_sem_registro": None, "confianca": "Sem dados"
+        }
+    ultima = d["data_hora"].max()
+    ultimo_dia = d["data"].max()
+    recorte = d[d["data"] == ultimo_dia]
+    delta = fechamento - ultima
+    horas = delta.total_seconds() / 3600
+    if horas < 24:
+        confianca = "Baixa — banco pode estar incompleto nas últimas 24h"
+    elif horas < 72:
+        confianca = "Moderada"
+    else:
+        confianca = "Alta"
+    return {
+        "ultima": ultima,
+        "jogos_ultimo_dia": len(recorte),
+        "vitorias_ultimo_dia": int((recorte["resultado"] == "V").sum()),
+        "derrotas_ultimo_dia": int((recorte["resultado"] == "D").sum()),
+        "tempo_sem_registro": delta,
+        "confianca": confianca,
+    }
+
+
+def resumo_confronto(confrontos: pd.DataFrame, jogador_a: str, jogador_b: str) -> dict:
+    total = len(confrontos)
+    vit_a = int((confrontos["vencedor"] == jogador_a).sum())
+    vit_b = int((confrontos["vencedor"] == jogador_b).sum())
+    pct_a = vit_a / total * 100 if total else 0
+    pct_b = vit_b / total * 100 if total else 0
+    equilibrio = abs(pct_a - pct_b)
+    if total == 0:
+        classificacao = "Sem histórico"
+    elif equilibrio <= 10:
+        classificacao = "Muito equilibrado"
+    elif equilibrio <= 25:
+        classificacao = "Equilibrado"
+    else:
+        classificacao = "Vantagem clara no histórico"
+    jogos_5_sets = int(((confrontos["sets_j1"] + confrontos["sets_j2"]) == 5).sum()) if total else 0
+    return {
+        "total": total, "vit_a": vit_a, "vit_b": vit_b,
+        "pct_a": pct_a, "pct_b": pct_b, "classificacao": classificacao,
+        "jogos_5_sets": jogos_5_sets,
+        "pct_5_sets": jogos_5_sets / total * 100 if total else 0,
+    }
+
+
+def ultimos_resultados_confronto(confrontos: pd.DataFrame, jogador: str, limite: int = 10) -> str:
+    if confrontos.empty:
+        return "—"
+    ultimos = confrontos.sort_values(["data_hora", "id"]).tail(limite)
+    return " ".join("V" if vencedor == jogador else "D" for vencedor in ultimos["vencedor"])
+
+
+def insights_confronto(confrontos: pd.DataFrame, jogador_a: str, jogador_b: str) -> list[tuple[str, str]]:
+    r = resumo_confronto(confrontos, jogador_a, jogador_b)
+    saida: list[tuple[str, str]] = []
+    if r["total"] == 0:
+        return [("warn", "Ainda não há confronto direto registrado entre os jogadores.")]
+    if r["total"] < 5:
+        saida.append(("warn", f"Amostra pequena: apenas {r['total']} confronto(s). Evite tratar a vantagem atual como padrão consolidado."))
+    else:
+        lider = jogador_a if r["vit_a"] > r["vit_b"] else jogador_b if r["vit_b"] > r["vit_a"] else None
+        if lider:
+            vantagem = abs(r["pct_a"] - r["pct_b"])
+            saida.append(("ok", f"{lider} lidera o histórico; diferença de {vantagem:.1f} pontos percentuais entre os aproveitamentos diretos."))
+        else:
+            saida.append(("ok", "O histórico direto está empatado."))
+    if r["pct_5_sets"] >= 40 and r["total"] >= 5:
+        saida.append(("ok", f"Confronto longo: {r['pct_5_sets']:.0f}% das partidas chegaram ao 5º set."))
+    elif r["total"] >= 5:
+        saida.append(("ok", f"Partidas de 5 sets representam {r['pct_5_sets']:.0f}% do confronto."))
+    por_dia = confrontos.groupby("data").size()
+    if len(por_dia) >= 2:
+        saida.append(("ok", f"Quando se encontram, disputam em média {por_dia.mean():.1f} partida(s) no mesmo dia; máximo observado de {int(por_dia.max())}."))
+    else:
+        saida.append(("warn", "O banco possui somente um dia desse confronto; ainda não é possível definir frequência entre aparições."))
+    return saida
+
+
 def tabela_historico(d: pd.DataFrame) -> pd.DataFrame:
     h = d.sort_values(["data_hora", "id"], ascending=False).copy()
     h["Data"] = h["data_hora"].dt.strftime("%d/%m/%Y")
@@ -303,7 +387,7 @@ st.sidebar.caption(
 )
 
 st.title("🏓 Inteligência do Tênis de Mesa")
-st.caption("Histórico, sequência, volume de partidas e descoberta progressiva de padrões.")
+st.caption("Versão 1.2 • confronto inteligente, momento, volume e padrões progressivos.")
 
 with st.container():
     st.markdown(
@@ -313,7 +397,9 @@ with st.container():
     )
 
 if pagina == "⚔️ Analisar confronto":
-    st.subheader("Análise entre dois jogadores")
+    st.subheader("Confronto inteligente")
+    st.caption("Compare o histórico direto e o momento registrado dos dois jogadores.")
+
     c1, c2 = st.columns(2)
     jogador_a = c1.selectbox("Jogador A", jogadores, index=0)
     opcoes_b = [j for j in jogadores if j != jogador_a]
@@ -323,66 +409,107 @@ if pagina == "⚔️ Analisar confronto":
     db = dados_jogador(reg, jogador_b)
     ra = resumo_jogador(reg, jogador_a)
     rb = resumo_jogador(reg, jogador_b)
+    sa = ultima_situacao_jogador(da, ultima_atualizacao)
+    sb = ultima_situacao_jogador(db, ultima_atualizacao)
 
     confrontos = df[
         ((df["jogador_1"] == jogador_a) & (df["jogador_2"] == jogador_b))
         | ((df["jogador_1"] == jogador_b) & (df["jogador_2"] == jogador_a))
     ].copy().sort_values(["data_hora", "id"])
+    rc = resumo_confronto(confrontos, jogador_a, jogador_b)
 
-    vit_a = int((confrontos["vencedor"] == jogador_a).sum())
-    vit_b = int((confrontos["vencedor"] == jogador_b).sum())
+    st.markdown(f"### {jogador_a}  ×  {jogador_b}")
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric("Confrontos diretos", rc["total"])
+    m2.metric(f"Vitórias — {jogador_a}", rc["vit_a"], f"{rc['pct_a']:.1f}% do confronto")
+    m3.metric(f"Vitórias — {jogador_b}", rc["vit_b"], f"{rc['pct_b']:.1f}% do confronto")
+    m4.metric("Classificação", rc["classificacao"])
 
-    m1, m2, m3 = st.columns(3)
-    m1.metric("Confrontos diretos", len(confrontos))
-    m2.metric(f"Vitórias — {jogador_a}", vit_a)
-    m3.metric(f"Vitórias — {jogador_b}", vit_b)
+    if rc["total"]:
+        st.progress(rc["pct_a"] / 100, text=f"Participação histórica de vitórias: {jogador_a} {rc['pct_a']:.1f}% × {rc['pct_b']:.1f}% {jogador_b}")
+        st.caption("Este percentual descreve o histórico registrado; não é uma probabilidade garantida para a próxima partida.")
 
-    st.markdown("### Situação registrada")
-    a, b = st.columns(2)
-    for col, nome, r, dados in [(a, jogador_a, ra, da), (b, jogador_b, rb, db)]:
-        with col:
-            st.markdown(f"#### {nome}")
-            x1, x2 = st.columns(2)
-            x1.metric("Sequência atual", r["sequencia"])
-            x2.metric("Aproveitamento", f"{r['aproveitamento']:.1f}%")
-            ultima_data = dados["data"].max()
-            jogos_ultimo_dia = int((dados["data"] == ultima_data).sum())
-            st.write(f"**Partidas no último dia registrado:** {jogos_ultimo_dia}")
-            st.write(f"**Última partida registrada:** {r['ultima']:%d/%m/%Y %H:%M}")
-            st.write(f"**Distância até o fechamento do banco:** {formatar_tempo(ultima_atualizacao - r['ultima'])}")
+    tab_resumo, tab_linha, tab_padroes = st.tabs(["📊 Resumo", "🕒 Linha do tempo", "🧠 Padrões"])
 
-    if confrontos.empty:
-        st.info("Ainda não há confronto direto entre esses jogadores no banco atual.")
-    else:
-        resultados_h2h_a = []
-        for _, r in confrontos.iterrows():
-            resultados_h2h_a.append("V" if r["vencedor"] == jogador_a else "D")
-        _, _, seq_h2h, _ = sequencias(resultados_h2h_a)
-        ultimo_vencedor = confrontos.iloc[-1]["vencedor"]
+    with tab_resumo:
+        st.markdown("### Momento dos jogadores")
+        a, b = st.columns(2)
+        for col, nome, r, situacao in [(a, jogador_a, ra, sa), (b, jogador_b, rb, sb)]:
+            with col:
+                st.markdown(f"#### {nome}")
+                x1, x2 = st.columns(2)
+                x1.metric("Sequência atual", r["sequencia"])
+                x2.metric("Aproveitamento geral", f"{r['aproveitamento']:.1f}%")
+                y1, y2 = st.columns(2)
+                y1.metric("Jogos no último dia", situacao["jogos_ultimo_dia"])
+                y2.metric("Saldo no último dia", situacao["vitorias_ultimo_dia"] - situacao["derrotas_ultimo_dia"], f"{situacao['vitorias_ultimo_dia']}V • {situacao['derrotas_ultimo_dia']}D")
+                st.write(f"**Última partida registrada:** {situacao['ultima']:%d/%m/%Y %H:%M}")
+                st.write(f"**Tempo desde o último registro:** {formatar_tempo(situacao['tempo_sem_registro'])}")
+                st.caption(f"Confiança do tempo sem jogar: {situacao['confianca']}")
 
-        st.markdown("### Padrões do confronto")
-        i1, i2, i3 = st.columns(3)
-        i1.metric("Líder do histórico", jogador_a if vit_a > vit_b else jogador_b if vit_b > vit_a else "Empate")
-        i2.metric(f"Sequência de {jogador_a}", seq_h2h)
-        i3.metric("Vencedor do último", ultimo_vencedor)
+        st.markdown("### Comparativo rápido")
+        comparativo = pd.DataFrame({
+            "Indicador": [
+                "Partidas no banco", "Vitórias", "Derrotas", "Aproveitamento",
+                "Sequência atual", "Maior sequência de vitórias",
+                "Maior sequência de derrotas", "Partidas no último dia registrado"
+            ],
+            jogador_a: [ra["jogos"], ra["vitorias"], ra["derrotas"], f"{ra['aproveitamento']:.1f}%", ra["sequencia"], ra["maior_v"], ra["maior_d"], sa["jogos_ultimo_dia"]],
+            jogador_b: [rb["jogos"], rb["vitorias"], rb["derrotas"], f"{rb['aproveitamento']:.1f}%", rb["sequencia"], rb["maior_v"], rb["maior_d"], sb["jogos_ultimo_dia"]],
+        })
+        st.dataframe(comparativo, use_container_width=True, hide_index=True)
 
-        por_dia = confrontos.groupby("data").size()
-        st.write(
-            f"**Volume do confronto:** média de {por_dia.mean():.1f} encontro(s) por dia em que se enfrentaram; "
-            f"máximo de {int(por_dia.max())}."
-        )
+        st.markdown("### Últimos resultados")
+        u1, u2 = st.columns(2)
+        u1.markdown(f"**{jogador_a} — geral:** {' '.join(da.tail(10)['resultado'].tolist()) or '—'}")
+        u1.markdown(f"**{jogador_a} — neste confronto:** {ultimos_resultados_confronto(confrontos, jogador_a)}")
+        u2.markdown(f"**{jogador_b} — geral:** {' '.join(db.tail(10)['resultado'].tolist()) or '—'}")
+        u2.markdown(f"**{jogador_b} — neste confronto:** {ultimos_resultados_confronto(confrontos, jogador_b)}")
 
-        h = confrontos.sort_values(["data_hora", "id"], ascending=False).copy()
-        h["Data"] = h["data_hora"].dt.strftime("%d/%m/%Y")
-        h["Hora"] = h["data_hora"].dt.strftime("%H:%M")
-        h["Placar"] = h["sets_j1"].astype(str) + " x " + h["sets_j2"].astype(str)
-        st.dataframe(
-            h[["Data", "Hora", "jogador_1", "jogador_2", "Placar", "vencedor"]].rename(
-                columns={"jogador_1": "Jogador 1", "jogador_2": "Jogador 2", "vencedor": "Vencedor"}
-            ),
-            use_container_width=True,
-            hide_index=True,
-        )
+    with tab_linha:
+        if confrontos.empty:
+            st.info("Ainda não há confronto direto entre esses jogadores no banco atual.")
+        else:
+            h = confrontos.sort_values(["data_hora", "id"], ascending=False).copy()
+            h["Data"] = h["data_hora"].dt.strftime("%d/%m/%Y")
+            h["Hora"] = h["data_hora"].dt.strftime("%H:%M")
+            h["Confronto"] = h["jogador_1"] + " " + h["sets_j1"].astype(str) + " × " + h["sets_j2"].astype(str) + " " + h["jogador_2"]
+            h["Total de sets"] = h["sets_j1"] + h["sets_j2"]
+            st.dataframe(
+                h[["Data", "Hora", "Confronto", "vencedor", "Total de sets"]].rename(columns={"vencedor": "Vencedor"}),
+                use_container_width=True, hide_index=True,
+            )
+            st.markdown("### Resumo por dia")
+            dias = confrontos.groupby("data").agg(
+                Confrontos=("id", "size"),
+                Vitorias_A=("vencedor", lambda s: int((s == jogador_a).sum())),
+                Vitorias_B=("vencedor", lambda s: int((s == jogador_b).sum())),
+            ).reset_index()
+            dias["Data"] = pd.to_datetime(dias["data"]).dt.strftime("%d/%m/%Y")
+            dias = dias.rename(columns={"Vitorias_A": f"Vitórias — {jogador_a}", "Vitorias_B": f"Vitórias — {jogador_b}"})
+            st.dataframe(dias.drop(columns="data"), use_container_width=True, hide_index=True)
+
+    with tab_padroes:
+        p1, p2, p3 = st.columns(3)
+        p1.metric("Partidas decididas no 5º set", rc["jogos_5_sets"], f"{rc['pct_5_sets']:.1f}%")
+        p2.metric(f"Últimos 10 — {jogador_a}", ultimos_resultados_confronto(confrontos, jogador_a))
+        p3.metric(f"Últimos 10 — {jogador_b}", ultimos_resultados_confronto(confrontos, jogador_b))
+        for tipo, texto in insights_confronto(confrontos, jogador_a, jogador_b):
+            classe = "ok-insight" if tipo == "ok" else "warning-insight"
+            st.markdown(f"<div class='insight {classe}'>{texto}</div>", unsafe_allow_html=True)
+
+        st.markdown("### Padrões individuais relevantes")
+        ia, ib = st.columns(2)
+        for col, nome, dados in [(ia, jogador_a, da), (ib, jogador_b, db)]:
+            with col:
+                st.markdown(f"#### {nome}")
+                encontrados = gerar_insights_jogador(dados)
+                if encontrados:
+                    for tipo, texto in encontrados:
+                        classe = "ok-insight" if tipo == "ok" else "warning-insight"
+                        st.markdown(f"<div class='insight {classe}'>{texto}</div>", unsafe_allow_html=True)
+                else:
+                    st.info("Ainda não há dados suficientes para encontrar padrões.")
 
 elif pagina == "👤 Perfil do jogador":
     st.subheader("Perfil inteligente do jogador")
