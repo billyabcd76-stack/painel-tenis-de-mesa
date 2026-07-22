@@ -7,7 +7,7 @@ import pandas as pd
 import streamlit as st
 
 st.set_page_config(
-    page_title="Inteligência do Tênis de Mesa — V1.3 Contraste Alto",
+    page_title="Inteligência do Tênis de Mesa — V2.0",
     page_icon="🏓",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -16,188 +16,59 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    :root {
-        --bg: #050d18;
-        --sidebar: #091728;
-        --card: #102238;
-        --card2: #132a45;
-        --border: #5f7898;
-        --white: #ffffff;
-        --muted: #e7eef8;
-        --pink: #ff4fa3;
+    :root{
+      --bg:#06101d;--panel:#0c1a2b;--panel2:#101f32;--line:#2b3e56;
+      --text:#f7f9fc;--muted:#a9b7c9;--green:#35d05b;--red:#ff3b4e;
+      --yellow:#ffb31a;--purple:#9d52ff;--pink:#ff3f8f;--blue:#5fa8ff;
     }
+    html,body,[data-testid="stAppViewContainer"],.stApp{background:var(--bg)!important;color:var(--text)!important}
+    [data-testid="stHeader"]{background:rgba(6,16,29,.96)!important}
+    .block-container{padding-top:1.25rem!important;padding-bottom:2rem!important;max-width:1500px!important}
+    .stApp h1,.stApp h2,.stApp h3,.stApp h4,.stApp p,.stApp span,.stApp label{color:var(--text)!important;opacity:1!important}
+    [data-testid="stCaptionContainer"] p{color:var(--muted)!important}
 
-    html, body, [data-testid="stAppViewContainer"], .stApp {
-        background: var(--bg) !important;
-        color: var(--white) !important;
-    }
-    [data-testid="stHeader"] { background: rgba(5,13,24,.98) !important; }
-    [data-testid="stMainBlockContainer"] { color: var(--white) !important; }
+    section[data-testid="stSidebar"]{background:#081525!important;border-right:1px solid #243850!important}
+    section[data-testid="stSidebar"] *{color:#fff!important;opacity:1!important}
+    section[data-testid="stSidebar"] div[role="radiogroup"]>label{background:transparent!important;border:1px solid transparent!important;border-radius:10px!important;padding:11px 12px!important;margin:4px 0!important}
+    section[data-testid="stSidebar"] div[role="radiogroup"]>label p{font-size:.96rem!important;font-weight:800!important}
+    section[data-testid="stSidebar"] div[role="radiogroup"]>label:hover{background:#10233a!important;border-color:#33516f!important}
+    section[data-testid="stSidebar"] div[role="radiogroup"]>label:has(input:checked){background:linear-gradient(90deg,#c7195e,#67359b)!important;border-color:#ff4f9b!important}
+    .sidebar-brand{font-size:1.05rem;font-weight:900;letter-spacing:.02em;margin:4px 0 10px}
+    .sidebar-kicker{font-size:.72rem;color:#92a6bd!important;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
+    .db-card{margin-top:22px;background:#0b1a2c;border:1px solid #2a4059;border-radius:12px;padding:14px}
+    .db-card b{font-size:.95rem}.db-num{font-size:1.55rem;font-weight:900}.db-time{color:var(--green)!important;font-weight:900}
 
-    /* TEXTO GERAL — SEM OPACIDADE */
-    .stApp h1, .stApp h2, .stApp h3, .stApp h4,
-    .stApp p, .stApp li, .stApp span, .stApp label,
-    [data-testid="stMarkdownContainer"] * {
-        color: var(--white) !important;
-        opacity: 1 !important;
-    }
-    .stCaptionContainer p, [data-testid="stCaptionContainer"] p {
-        color: var(--muted) !important;
-        opacity: 1 !important;
-        font-weight: 600 !important;
-    }
+    .hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:12px}
+    .hero-title{font-size:2.05rem;font-weight:900;letter-spacing:-.02em}.hero-sub{color:var(--muted)!important;margin-top:2px}
+    .statusbar{background:#0a1b30;border:1px solid #35577b;border-radius:10px;padding:11px 14px;margin:10px 0 18px;font-weight:700}
+    .section-kicker{color:var(--pink)!important;font-weight:900;font-size:1.05rem;text-transform:uppercase;letter-spacing:.03em;margin:8px 0 2px}
+    .section-sub{color:var(--muted)!important;margin-bottom:12px}
 
-    /* MENU LATERAL */
-    section[data-testid="stSidebar"], [data-testid="stSidebar"] {
-        background: var(--sidebar) !important;
-        border-right: 2px solid #36577b !important;
-    }
-    section[data-testid="stSidebar"] *, [data-testid="stSidebar"] * {
-        color: #ffffff !important;
-        opacity: 1 !important;
-        -webkit-text-fill-color: #ffffff !important;
-    }
-    section[data-testid="stSidebar"] h2 {
-        font-size: 1.25rem !important;
-        font-weight: 900 !important;
-        letter-spacing: .01em !important;
-    }
-    section[data-testid="stSidebar"] div[role="radiogroup"] > label,
-    section[data-testid="stSidebar"] [data-baseweb="radio"] {
-        background: #12263e !important;
-        border: 1px solid #557596 !important;
-        border-radius: 12px !important;
-        padding: 12px 14px !important;
-        margin: 0 0 9px 0 !important;
-        min-height: 48px !important;
-    }
-    section[data-testid="stSidebar"] div[role="radiogroup"] > label p,
-    section[data-testid="stSidebar"] [data-baseweb="radio"] p,
-    section[data-testid="stSidebar"] label span {
-        color: #ffffff !important;
-        -webkit-text-fill-color: #ffffff !important;
-        opacity: 1 !important;
-        font-size: 1rem !important;
-        font-weight: 900 !important;
-        text-shadow: 0 1px 1px #000 !important;
-    }
-    section[data-testid="stSidebar"] div[role="radiogroup"] > label:hover {
-        background: #1a395c !important;
-        border-color: #a7c7e8 !important;
-    }
-    section[data-testid="stSidebar"] div[role="radiogroup"] > label:has(input:checked),
-    section[data-testid="stSidebar"] [data-baseweb="radio"]:has(input:checked) {
-        background: linear-gradient(90deg,#c51f68,#663184) !important;
-        border: 2px solid #ff86bd !important;
-    }
+    [data-baseweb="select"]>div{background:#102238!important;border:1px solid #2b425d!important;color:#fff!important;min-height:46px!important}
+    [data-baseweb="select"] *{color:#fff!important}
+    [data-baseweb="popover"] *{color:#111!important}
+    .vs{display:flex;align-items:center;justify-content:center;font-weight:900;font-size:2rem;height:46px}
 
-    /* CARDS E NÚMEROS */
-    div[data-testid="stMetric"] {
-        background: var(--card) !important;
-        border: 1px solid var(--border) !important;
-        padding: 16px !important;
-        border-radius: 14px !important;
-        opacity: 1 !important;
-    }
-    div[data-testid="stMetric"] * { opacity: 1 !important; }
-    div[data-testid="stMetric"] [data-testid="stMetricLabel"],
-    div[data-testid="stMetric"] [data-testid="stMetricLabel"] p,
-    div[data-testid="stMetric"] label {
-        color: #f3f7fc !important;
-        -webkit-text-fill-color: #f3f7fc !important;
-        font-size: .98rem !important;
-        font-weight: 800 !important;
-    }
-    div[data-testid="stMetric"] [data-testid="stMetricValue"],
-    div[data-testid="stMetric"] [data-testid="stMetricValue"] > div {
-        color: #ffffff !important;
-        -webkit-text-fill-color: #ffffff !important;
-        font-size: 2.15rem !important;
-        font-weight: 900 !important;
-        line-height: 1.15 !important;
-        text-shadow: 0 1px 2px #000 !important;
-    }
-    div[data-testid="stMetric"] [data-testid="stMetricDelta"],
-    div[data-testid="stMetric"] [data-testid="stMetricDelta"] * {
-        color: #dcecff !important;
-        -webkit-text-fill-color: #dcecff !important;
-        opacity: 1 !important;
-        font-weight: 700 !important;
-    }
+    .metric-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:14px 0}
+    .metric-card{background:linear-gradient(180deg,#102139,#0b1829);border:1px solid #334a64;border-radius:11px;padding:14px 16px;min-height:105px}
+    .metric-label{font-size:.78rem;font-weight:900;text-transform:uppercase;color:#dbe5f0!important}.metric-value{font-size:2.15rem;font-weight:900;line-height:1.05;margin-top:6px}.metric-sub{font-size:.86rem;color:#dce5f0!important;margin-top:4px;font-weight:700}
+    .green{color:var(--green)!important}.red{color:var(--red)!important}.yellow{color:var(--yellow)!important}.purple{color:var(--purple)!important}.pink{color:var(--pink)!important}.blue{color:var(--blue)!important}
 
-    /* ABAS */
-    [data-baseweb="tab-list"] { gap: 8px !important; }
-    [data-baseweb="tab-list"] button {
-        background: #102238 !important;
-        border: 1px solid #4e7095 !important;
-        border-radius: 10px 10px 0 0 !important;
-    }
-    [data-baseweb="tab-list"] button *, [data-baseweb="tab-list"] button p {
-        color: #ffffff !important;
-        -webkit-text-fill-color: #ffffff !important;
-        opacity: 1 !important;
-        font-weight: 900 !important;
-    }
-    [data-baseweb="tab-list"] button[aria-selected="true"] {
-        background: #b92265 !important;
-        border-color: #ff86bd !important;
-    }
+    .player-card{background:#0b192b;border:1px solid #2d425a;border-radius:11px;padding:14px 16px;margin:4px 0 10px}.player-card.green-border{border-top:3px solid var(--green)}.player-card.red-border{border-top:3px solid var(--red)}
+    .player-title{font-weight:900;font-size:1.05rem}.player-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:8px 24px;margin-top:10px}.rowline{display:flex;justify-content:space-between;border-bottom:1px solid #20334a;padding:6px 0}.rowline:last-child{border-bottom:none}.value-strong{font-weight:900}
 
-    /* CAMPOS */
-    [data-baseweb="select"] > div, [data-baseweb="input"] > div,
-    .stTextInput input, .stSelectbox div[data-baseweb="select"] > div {
-        background: #ffffff !important;
-        color: #09111c !important;
-        -webkit-text-fill-color: #09111c !important;
-        border: 2px solid #b6c8da !important;
-        opacity: 1 !important;
-    }
-    [data-baseweb="select"] *, [data-baseweb="popover"] * {
-        color: #09111c !important;
-        -webkit-text-fill-color: #09111c !important;
-        opacity: 1 !important;
-        font-weight: 700 !important;
-    }
+    .results-card{background:#0b192b;border:1px solid #2d425a;border-radius:10px;padding:12px 14px;margin:8px 0}.results-title{font-size:.78rem;font-weight:900;text-transform:uppercase;margin-bottom:9px}.result-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:5px;font-weight:900;margin-right:5px;color:#fff!important}.v{background:#198b36}.d{background:#b82334}
 
-    /* TABELAS */
-    [data-testid="stDataFrame"], [data-testid="stTable"] {
-        background: var(--card) !important;
-        border: 1px solid var(--border) !important;
-        border-radius: 12px !important;
-    }
-    [data-testid="stDataFrame"] *, [data-testid="stTable"] * {
-        opacity: 1 !important;
-    }
+    .insight{background:#0b192b;border:1px solid #2e455f;border-left:5px solid var(--blue);border-radius:10px;padding:12px 14px;margin:8px 0;font-weight:750}.insight.ok{border-left-color:var(--green)}.insight.warn{border-left-color:var(--yellow)}
 
-    .status-box, .insight {
-        background: var(--card2) !important;
-        color: #ffffff !important;
-        border: 1px solid #557596 !important;
-        border-radius: 12px !important;
-        padding: 13px 15px !important;
-        margin: 7px 0 !important;
-        font-weight: 800 !important;
-        opacity: 1 !important;
-    }
-    .insight { border-left: 5px solid #55c2ff !important; }
-    .warning-insight { border-left-color: #ffc14d !important; }
-    .ok-insight { border-left-color: #4ee19a !important; }
-    .muted { color: #e7eef8 !important; opacity: 1 !important; }
+    [data-testid="stDataFrame"], [data-testid="stTable"]{border:1px solid #2d425a!important;border-radius:10px!important;overflow:hidden!important}
+    [data-testid="stDataFrame"] *{opacity:1!important}
+    div[data-testid="stMetric"]{background:#0b192b!important;border:1px solid #2d425a!important;border-radius:10px!important;padding:12px!important}
+    div[data-testid="stMetric"] [data-testid="stMetricValue"]{color:#fff!important;font-weight:900!important}
 
-    .version-badge {
-        display:inline-block;
-        background:#ff4fa3;
-        color:#ffffff !important;
-        font-weight:900;
-        padding:7px 12px;
-        border-radius:999px;
-        margin:0 0 10px 0;
-        border:1px solid #ffafd4;
-    }
+    @media(max-width:900px){.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{display:block}.player-grid{grid-template-columns:1fr}}
     </style>
-    """,
-    unsafe_allow_html=True,
-)
+    """, unsafe_allow_html=True)
 
 DIAS_PT = {
     0: "Segunda-feira",
@@ -512,273 +383,141 @@ def tabela_historico(d: pd.DataFrame) -> pd.DataFrame:
     )
 
 
+
+
+def esc(text: object) -> str:
+    import html
+    return html.escape(str(text))
+
+
+def result_badges(values: list[str]) -> str:
+    if not values:
+        return "<span style='color:#9fb0c3'>Sem dados</span>"
+    return "".join(f"<span class='result-badge {'v' if x=='V' else 'd'}'>{x}</span>" for x in values)
+
+
+def metric_card(label: str, value: object, sub: str = "", color: str = "") -> str:
+    return f"<div class='metric-card'><div class='metric-label'>{esc(label)}</div><div class='metric-value {color}'>{esc(value)}</div><div class='metric-sub'>{esc(sub)}</div></div>"
+
+
+def player_panel(nome: str, resumo: dict, situacao: dict, color: str) -> str:
+    seq_cor = "green" if resumo['sequencia'].startswith('Vitórias') else "red"
+    return f"""
+    <div class='player-card {color}-border'>
+      <div class='player-title {color}'>{esc(nome)}</div>
+      <div class='player-grid'>
+        <div>
+          <div class='rowline'><span>Sequência atual</span><span class='value-strong {seq_cor}'>{esc(resumo['sequencia'])}</span></div>
+          <div class='rowline'><span>Partidas no último dia</span><span class='value-strong'>{situacao['jogos_ultimo_dia']}</span></div>
+          <div class='rowline'><span>Vitórias no último dia</span><span class='value-strong green'>{situacao['vitorias_ultimo_dia']}</span></div>
+          <div class='rowline'><span>Derrotas no último dia</span><span class='value-strong red'>{situacao['derrotas_ultimo_dia']}</span></div>
+        </div>
+        <div>
+          <div class='rowline'><span>Aproveitamento geral</span><span class='value-strong {color}'>{resumo['aproveitamento']:.1f}%</span></div>
+          <div class='rowline'><span>Desde a última partida</span><span class='value-strong'>{esc(formatar_tempo(situacao['tempo_sem_registro']))}</span></div>
+          <div class='rowline'><span>Maior série de vitórias</span><span class='value-strong green'>{resumo['maior_v']}</span></div>
+          <div class='rowline'><span>Maior série de derrotas</span><span class='value-strong red'>{resumo['maior_d']}</span></div>
+        </div>
+      </div>
+    </div>"""
+
+
+def styled_history_player(d: pd.DataFrame) -> pd.io.formats.style.Styler:
+    t=tabela_historico(d)
+    def color_result(v):
+        return 'background-color:#153b22;color:#6dff8f;font-weight:800' if v=='Vitória' else 'background-color:#431a22;color:#ff7180;font-weight:800'
+    return t.style.map(color_result, subset=['Resultado']).set_properties(**{'background-color':'#0b192b','color':'#f5f7fa','border-color':'#233850'}).set_table_styles([
+        {'selector':'th','props':[('background-color','#102238'),('color','#ffffff'),('font-weight','800')]}
+    ])
+
+
 try:
-    df = carregar_dados()
-    reg = criar_registros(df)
+    df = carregar_dados(); reg = criar_registros(df)
 except Exception as exc:
-    st.error(f"Não foi possível carregar o banco de dados: {exc}")
-    st.stop()
+    st.error(f"Não foi possível carregar o banco de dados: {exc}"); st.stop()
 
-jogadores = sorted(reg["jogador"].dropna().unique().tolist())
-ultima_atualizacao = df["data_hora"].max()
-primeira_data = df["data_hora"].min()
+jogadores=sorted(reg['jogador'].dropna().unique().tolist())
+ultima_atualizacao=df['data_hora'].max(); primeira_data=df['data_hora'].min()
 
-st.sidebar.markdown("## 🏓 Sistema de análise")
-pagina = st.sidebar.radio(
-    "Navegação",
-    [
-        "⚔️ Analisar confronto",
-        "👤 Perfil do jogador",
-        "🧠 Padrões do campeonato",
-        "📋 Histórico geral",
-    ],
-)
-st.sidebar.divider()
-st.sidebar.caption(
-    f"Banco: {len(df)} partidas • {len(jogadores)} jogadores\n\n"
-    f"Atualizado até {ultima_atualizacao:%d/%m/%Y %H:%M}"
-)
+st.sidebar.markdown("<div class='sidebar-kicker'>Sistema de análise</div><div class='sidebar-brand'>🏓 Inteligência do Tênis de Mesa</div>",unsafe_allow_html=True)
+pagina=st.sidebar.radio('Navegação',['⚔️ Analisar confronto','👤 Perfil do jogador','📈 Padrões do campeonato','🗄️ Banco de dados','🧠 Inteligência'],label_visibility='collapsed')
+st.sidebar.markdown(f"""<div class='db-card'><b>🗄️ Banco de dados</b><div style='margin-top:12px'>Partidas registradas</div><div class='db-num'>{len(df)}</div><div>Jogadores</div><div class='db-num'>{len(jogadores)}</div><div>Atualizado em</div><div class='db-time'>{ultima_atualizacao:%d/%m/%Y %H:%M}</div></div>""",unsafe_allow_html=True)
 
-st.markdown('<div class="version-badge">V1.3 — CONTRASTE ALTO</div>', unsafe_allow_html=True)
-st.title("🏓 Inteligência do Tênis de Mesa")
-st.caption("Versão 1.2.1 • contraste corrigido para melhor leitura.")
+st.markdown("<div class='hero'><div><div class='hero-title'>🏓 Inteligência do Tênis de Mesa</div><div class='hero-sub'>Versão 2.0 • interface profissional, comparação e padrões progressivos.</div></div></div>",unsafe_allow_html=True)
+st.markdown(f"<div class='statusbar'>ⓘ Último dado registrado: <b>{ultima_atualizacao:%d/%m/%Y às %H:%M}</b> &nbsp;•&nbsp; O banco pode ter atraso de até 24 horas.</div>",unsafe_allow_html=True)
 
-with st.container():
-    st.markdown(
-        f"<div class='status-box'><b>Último dado registrado:</b> {ultima_atualizacao:%d/%m/%Y às %H:%M} "
-        f"<span class='muted'>• O banco pode ter atraso de até 24 horas.</span></div>",
-        unsafe_allow_html=True,
-    )
+if pagina=='⚔️ Analisar confronto':
+    st.markdown("<div class='section-kicker'>Análise entre dois jogadores</div><div class='section-sub'>Histórico direto, momento atual e leitura visual de vitórias e derrotas.</div>",unsafe_allow_html=True)
+    c1,cv,c2=st.columns([1,0.12,1])
+    jogador_a=c1.selectbox('Jogador 1',jogadores,index=0)
+    opcoes_b=[j for j in jogadores if j!=jogador_a]
+    with cv: st.markdown("<div class='vs'>X</div>",unsafe_allow_html=True)
+    jogador_b=c2.selectbox('Jogador 2',opcoes_b,index=0)
+    da=dados_jogador(reg,jogador_a); db=dados_jogador(reg,jogador_b)
+    ra=resumo_jogador(reg,jogador_a); rb=resumo_jogador(reg,jogador_b)
+    sa=ultima_situacao_jogador(da,ultima_atualizacao); sb=ultima_situacao_jogador(db,ultima_atualizacao)
+    confrontos=df[(((df['jogador_1']==jogador_a)&(df['jogador_2']==jogador_b))|((df['jogador_1']==jogador_b)&(df['jogador_2']==jogador_a)))].copy().sort_values(['data_hora','id'])
+    rc=resumo_confronto(confrontos,jogador_a,jogador_b)
+    cards=''.join([
+      metric_card('Confrontos',rc['total'],'Total de partidas'),
+      metric_card(f'Vitórias — {jogador_a}',rc['vit_a'],f"{rc['pct_a']:.1f}%",'green'),
+      metric_card(f'Vitórias — {jogador_b}',rc['vit_b'],f"{rc['pct_b']:.1f}%",'red'),
+      metric_card('Empates',0,'0%','yellow'),
+      metric_card('Decididas no 5º set',rc['jogos_5_sets'],f"{rc['pct_5_sets']:.1f}%",'purple')])
+    st.markdown(f"<div class='metric-grid'>{cards}</div>",unsafe_allow_html=True)
+    a,b=st.columns(2)
+    a.markdown(player_panel(jogador_a,ra,sa,'green'),unsafe_allow_html=True)
+    b.markdown(player_panel(jogador_b,rb,sb,'red'),unsafe_allow_html=True)
 
-if pagina == "⚔️ Analisar confronto":
-    st.subheader("Confronto inteligente")
-    st.caption("Compare o histórico direto e o momento registrado dos dois jogadores.")
+    r1,r2,r3=st.columns(3)
+    r1.markdown(f"<div class='results-card'><div class='results-title'>Últimos 10 resultados — {esc(jogador_a)}</div>{result_badges(da.tail(10)['resultado'].tolist())}</div>",unsafe_allow_html=True)
+    r2.markdown(f"<div class='results-card'><div class='results-title'>Últimos 10 resultados — {esc(jogador_b)}</div>{result_badges(db.tail(10)['resultado'].tolist())}</div>",unsafe_allow_html=True)
+    direct_a=[] if confrontos.empty else ['V' if x==jogador_a else 'D' for x in confrontos.tail(10)['vencedor']]
+    r3.markdown(f"<div class='results-card'><div class='results-title'>Últimos 10 confrontos entre os dois</div>{result_badges(direct_a)}</div>",unsafe_allow_html=True)
 
-    c1, c2 = st.columns(2)
-    jogador_a = c1.selectbox("Jogador A", jogadores, index=0)
-    opcoes_b = [j for j in jogadores if j != jogador_a]
-    jogador_b = c2.selectbox("Jogador B", opcoes_b, index=0)
+    st.markdown("<div class='section-kicker'>Histórico de confrontos</div>",unsafe_allow_html=True)
+    if confrontos.empty: st.info('Ainda não há confronto direto registrado.')
+    else:
+      h=confrontos.sort_values(['data_hora','id'],ascending=False).copy()
+      h['Data']=h['data_hora'].dt.strftime('%d/%m/%Y %H:%M');h['Placar']=h['sets_j1'].astype(str)+' x '+h['sets_j2'].astype(str);h['Sets']=h['sets_j1']+h['sets_j2'];h['Resultado']='Vitória'
+      show=h[['Data','vencedor','Placar','Sets','Resultado']].rename(columns={'vencedor':'Vencedor'})
+      def winner_color(v): return 'color:#35d05b;font-weight:800' if v==jogador_a else 'color:#ff3b4e;font-weight:800'
+      sty=show.style.map(winner_color,subset=['Vencedor']).map(lambda v:'background-color:#153b22;color:#6dff8f;font-weight:800',subset=['Resultado']).set_properties(**{'background-color':'#0b192b','color':'#f5f7fa','border-color':'#233850'}).set_table_styles([{'selector':'th','props':[('background-color','#102238'),('color','#fff'),('font-weight','800')]}])
+      st.dataframe(sty,use_container_width=True,hide_index=True)
+    st.markdown("<div class='section-kicker'>Padrões encontrados</div>",unsafe_allow_html=True)
+    for tipo,texto in insights_confronto(confrontos,jogador_a,jogador_b): st.markdown(f"<div class='insight {'ok' if tipo=='ok' else 'warn'}'>{esc(texto)}</div>",unsafe_allow_html=True)
 
-    da = dados_jogador(reg, jogador_a)
-    db = dados_jogador(reg, jogador_b)
-    ra = resumo_jogador(reg, jogador_a)
-    rb = resumo_jogador(reg, jogador_b)
-    sa = ultima_situacao_jogador(da, ultima_atualizacao)
-    sb = ultima_situacao_jogador(db, ultima_atualizacao)
+elif pagina=='👤 Perfil do jogador':
+    st.markdown("<div class='section-kicker'>Perfil do jogador</div><div class='section-sub'>Volume, frequência, sequência e histórico com leitura rápida.</div>",unsafe_allow_html=True)
+    jogador=st.selectbox('Selecione o jogador',jogadores)
+    d=dados_jogador(reg,jogador);r=resumo_jogador(reg,jogador);s=ultima_situacao_jogador(d,ultima_atualizacao);p=padrao_intervalos(d)
+    cards=''.join([metric_card('Partidas',r['jogos']),metric_card('Vitórias',r['vitorias'],color='green'),metric_card('Derrotas',r['derrotas'],color='red'),metric_card('Aproveitamento',f"{r['aproveitamento']:.1f}%",color='blue'),metric_card('Dias ativos',p['dias_ativos'],color='purple')])
+    st.markdown(f"<div class='metric-grid'>{cards}</div>",unsafe_allow_html=True)
+    st.markdown(player_panel(jogador,r,s,'green'),unsafe_allow_html=True)
+    st.markdown(f"<div class='results-card'><div class='results-title'>Últimos 10 resultados</div>{result_badges(d.tail(10)['resultado'].tolist())}</div>",unsafe_allow_html=True)
+    st.markdown("<div class='section-kicker'>Padrões encontrados</div>",unsafe_allow_html=True)
+    for tipo,texto in gerar_insights_jogador(d): st.markdown(f"<div class='insight {'ok' if tipo=='ok' else 'warn'}'>{esc(texto)}</div>",unsafe_allow_html=True)
+    st.markdown("<div class='section-kicker'>Histórico</div>",unsafe_allow_html=True)
+    st.dataframe(styled_history_player(d),use_container_width=True,hide_index=True)
 
-    confrontos = df[
-        ((df["jogador_1"] == jogador_a) & (df["jogador_2"] == jogador_b))
-        | ((df["jogador_1"] == jogador_b) & (df["jogador_2"] == jogador_a))
-    ].copy().sort_values(["data_hora", "id"])
-    rc = resumo_confronto(confrontos, jogador_a, jogador_b)
-
-    st.markdown(f"### {jogador_a}  ×  {jogador_b}")
-    m1, m2, m3, m4 = st.columns(4)
-    m1.metric("Confrontos diretos", rc["total"])
-    m2.metric(f"Vitórias — {jogador_a}", rc["vit_a"], f"{rc['pct_a']:.1f}% do confronto")
-    m3.metric(f"Vitórias — {jogador_b}", rc["vit_b"], f"{rc['pct_b']:.1f}% do confronto")
-    m4.metric("Classificação", rc["classificacao"])
-
-    if rc["total"]:
-        st.progress(rc["pct_a"] / 100, text=f"Participação histórica de vitórias: {jogador_a} {rc['pct_a']:.1f}% × {rc['pct_b']:.1f}% {jogador_b}")
-        st.caption("Este percentual descreve o histórico registrado; não é uma probabilidade garantida para a próxima partida.")
-
-    tab_resumo, tab_linha, tab_padroes = st.tabs(["📊 Resumo", "🕒 Linha do tempo", "🧠 Padrões"])
-
-    with tab_resumo:
-        st.markdown("### Momento dos jogadores")
-        a, b = st.columns(2)
-        for col, nome, r, situacao in [(a, jogador_a, ra, sa), (b, jogador_b, rb, sb)]:
-            with col:
-                st.markdown(f"#### {nome}")
-                x1, x2 = st.columns(2)
-                x1.metric("Sequência atual", r["sequencia"])
-                x2.metric("Aproveitamento geral", f"{r['aproveitamento']:.1f}%")
-                y1, y2 = st.columns(2)
-                y1.metric("Jogos no último dia", situacao["jogos_ultimo_dia"])
-                y2.metric("Saldo no último dia", situacao["vitorias_ultimo_dia"] - situacao["derrotas_ultimo_dia"], f"{situacao['vitorias_ultimo_dia']}V • {situacao['derrotas_ultimo_dia']}D")
-                st.write(f"**Última partida registrada:** {situacao['ultima']:%d/%m/%Y %H:%M}")
-                st.write(f"**Tempo desde o último registro:** {formatar_tempo(situacao['tempo_sem_registro'])}")
-                st.caption(f"Confiança do tempo sem jogar: {situacao['confianca']}")
-
-        st.markdown("### Comparativo rápido")
-        comparativo = pd.DataFrame({
-            "Indicador": [
-                "Partidas no banco", "Vitórias", "Derrotas", "Aproveitamento",
-                "Sequência atual", "Maior sequência de vitórias",
-                "Maior sequência de derrotas", "Partidas no último dia registrado"
-            ],
-            jogador_a: [ra["jogos"], ra["vitorias"], ra["derrotas"], f"{ra['aproveitamento']:.1f}%", ra["sequencia"], ra["maior_v"], ra["maior_d"], sa["jogos_ultimo_dia"]],
-            jogador_b: [rb["jogos"], rb["vitorias"], rb["derrotas"], f"{rb['aproveitamento']:.1f}%", rb["sequencia"], rb["maior_v"], rb["maior_d"], sb["jogos_ultimo_dia"]],
-        })
-        st.dataframe(comparativo, use_container_width=True, hide_index=True)
-
-        st.markdown("### Últimos resultados")
-        u1, u2 = st.columns(2)
-        u1.markdown(f"**{jogador_a} — geral:** {' '.join(da.tail(10)['resultado'].tolist()) or '—'}")
-        u1.markdown(f"**{jogador_a} — neste confronto:** {ultimos_resultados_confronto(confrontos, jogador_a)}")
-        u2.markdown(f"**{jogador_b} — geral:** {' '.join(db.tail(10)['resultado'].tolist()) or '—'}")
-        u2.markdown(f"**{jogador_b} — neste confronto:** {ultimos_resultados_confronto(confrontos, jogador_b)}")
-
-    with tab_linha:
-        if confrontos.empty:
-            st.info("Ainda não há confronto direto entre esses jogadores no banco atual.")
-        else:
-            h = confrontos.sort_values(["data_hora", "id"], ascending=False).copy()
-            h["Data"] = h["data_hora"].dt.strftime("%d/%m/%Y")
-            h["Hora"] = h["data_hora"].dt.strftime("%H:%M")
-            h["Confronto"] = h["jogador_1"] + " " + h["sets_j1"].astype(str) + " × " + h["sets_j2"].astype(str) + " " + h["jogador_2"]
-            h["Total de sets"] = h["sets_j1"] + h["sets_j2"]
-            st.dataframe(
-                h[["Data", "Hora", "Confronto", "vencedor", "Total de sets"]].rename(columns={"vencedor": "Vencedor"}),
-                use_container_width=True, hide_index=True,
-            )
-            st.markdown("### Resumo por dia")
-            dias = confrontos.groupby("data").agg(
-                Confrontos=("id", "size"),
-                Vitorias_A=("vencedor", lambda s: int((s == jogador_a).sum())),
-                Vitorias_B=("vencedor", lambda s: int((s == jogador_b).sum())),
-            ).reset_index()
-            dias["Data"] = pd.to_datetime(dias["data"]).dt.strftime("%d/%m/%Y")
-            dias = dias.rename(columns={"Vitorias_A": f"Vitórias — {jogador_a}", "Vitorias_B": f"Vitórias — {jogador_b}"})
-            st.dataframe(dias.drop(columns="data"), use_container_width=True, hide_index=True)
-
-    with tab_padroes:
-        p1, p2, p3 = st.columns(3)
-        p1.metric("Partidas decididas no 5º set", rc["jogos_5_sets"], f"{rc['pct_5_sets']:.1f}%")
-        p2.metric(f"Últimos 10 — {jogador_a}", ultimos_resultados_confronto(confrontos, jogador_a))
-        p3.metric(f"Últimos 10 — {jogador_b}", ultimos_resultados_confronto(confrontos, jogador_b))
-        for tipo, texto in insights_confronto(confrontos, jogador_a, jogador_b):
-            classe = "ok-insight" if tipo == "ok" else "warning-insight"
-            st.markdown(f"<div class='insight {classe}'>{texto}</div>", unsafe_allow_html=True)
-
-        st.markdown("### Padrões individuais relevantes")
-        ia, ib = st.columns(2)
-        for col, nome, dados in [(ia, jogador_a, da), (ib, jogador_b, db)]:
-            with col:
-                st.markdown(f"#### {nome}")
-                encontrados = gerar_insights_jogador(dados)
-                if encontrados:
-                    for tipo, texto in encontrados:
-                        classe = "ok-insight" if tipo == "ok" else "warning-insight"
-                        st.markdown(f"<div class='insight {classe}'>{texto}</div>", unsafe_allow_html=True)
-                else:
-                    st.info("Ainda não há dados suficientes para encontrar padrões.")
-
-elif pagina == "👤 Perfil do jogador":
-    st.subheader("Perfil inteligente do jogador")
-    termo = st.text_input("Pesquisar pelo nome", placeholder="Digite parte do nome")
-    encontrados = [j for j in jogadores if termo.strip().lower() in j.lower()] if termo.strip() else jogadores
-    if not encontrados:
-        st.warning("Nenhum jogador encontrado.")
-        st.stop()
-
-    jogador = st.selectbox("Selecione o jogador", encontrados)
-    d = dados_jogador(reg, jogador)
-    r = resumo_jogador(reg, jogador)
-
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Partidas", r["jogos"])
-    c2.metric("Vitórias", r["vitorias"])
-    c3.metric("Derrotas", r["derrotas"])
-    c4.metric("Aproveitamento", f"{r['aproveitamento']:.1f}%")
-
-    st.markdown("### Momento e volume")
-    a, b = st.columns(2)
-    with a:
-        st.write(f"**Sequência atual:** {r['sequencia']}")
-        st.write(f"**Maior sequência de vitórias:** {r['maior_v']}")
-        st.write(f"**Maior sequência de derrotas:** {r['maior_d']}")
-        ultimos = " ".join(d.tail(10)["resultado"].tolist())
-        st.write(f"**Últimos 10:** {ultimos}")
-
-    with b:
-        por_dia = d.groupby("data").size().sort_index()
-        st.write(f"**Dias ativos registrados:** {len(por_dia)}")
-        st.write(f"**Média por dia ativo:** {por_dia.mean():.1f}")
-        st.write(f"**Máximo em um dia:** {int(por_dia.max())}")
-        st.write(f"**Última partida registrada:** {r['ultima']:%d/%m/%Y %H:%M}")
-
-    st.markdown("### Frequência de aparição")
-    p = padrao_intervalos(d)
-    f1, f2, f3, f4 = st.columns(4)
-    f1.metric("Dias ativos", p["dias_ativos"])
-    f2.metric("Intervalo médio", f"{p['media']:.1f} dias" if p["media"] is not None else "Aguardando dados")
-    f3.metric("Intervalo mais comum", f"{p['moda']} dias" if p["moda"] is not None else "Aguardando dados")
-    f4.metric("Regularidade", f"{p['regularidade']:.0f}%" if p["regularidade"] is not None else "Aguardando dados")
-
-    if p["dias_ativos"] < 4:
-        st.warning("O banco ainda não possui dias suficientes para definir o ciclo de aparição deste jogador. A análise será ativada automaticamente conforme novas datas forem adicionadas.")
-
-    st.markdown("### Desempenho conforme a partida do dia")
-    ordem = d.groupby("ordem_no_dia").agg(
-        Partidas=("resultado", "size"),
-        Vitórias=("resultado", lambda s: int((s == "V").sum())),
-    )
-    ordem["Aproveitamento"] = ordem["Vitórias"] / ordem["Partidas"] * 100
-    ordem.index.name = "Partida do dia"
-    st.dataframe(ordem.round({"Aproveitamento": 1}), use_container_width=True)
-
-    st.markdown("### Padrões encontrados")
-    for tipo, texto in gerar_insights_jogador(d):
-        classe = "ok-insight" if tipo == "ok" else "warning-insight"
-        st.markdown(f"<div class='insight {classe}'>{texto}</div>", unsafe_allow_html=True)
-
-    st.markdown("### Histórico")
-    st.dataframe(tabela_historico(d), use_container_width=True, hide_index=True)
-
-elif pagina == "🧠 Padrões do campeonato":
-    st.subheader("Padrões gerais do campeonato")
-    dias_banco = df["data"].nunique()
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Partidas registradas", len(df))
-    c2.metric("Jogadores", len(jogadores))
-    c3.metric("Dias no banco", dias_banco)
-    c4.metric("Média de jogos/dia", f"{len(df) / dias_banco:.1f}" if dias_banco else "—")
-
-    st.markdown("### Jogadores com maior volume")
-    volume = reg.groupby("jogador").agg(
-        Partidas=("id", "size"),
-        Dias_ativos=("data", "nunique"),
-        Vitórias=("resultado", lambda s: int((s == "V").sum())),
-    )
-    volume["Média por dia ativo"] = volume["Partidas"] / volume["Dias_ativos"]
-    volume["Aproveitamento"] = volume["Vitórias"] / volume["Partidas"] * 100
-    volume = volume.sort_values(["Média por dia ativo", "Partidas"], ascending=False)
-    st.dataframe(volume.head(25).round(1), use_container_width=True)
-
-    st.markdown("### Distribuição por horário")
-    horario = df["hora_num"].map(faixa_horaria).value_counts().reindex(["Madrugada", "Manhã", "Tarde", "Noite"], fill_value=0)
+elif pagina=='📈 Padrões do campeonato':
+    st.markdown("<div class='section-kicker'>Padrões do campeonato</div><div class='section-sub'>Volume geral, jogadores mais ativos e distribuição por horário.</div>",unsafe_allow_html=True)
+    dias=df['data'].nunique();cards=''.join([metric_card('Partidas registradas',len(df)),metric_card('Jogadores',len(jogadores),color='blue'),metric_card('Dias no banco',dias,color='purple'),metric_card('Média de jogos/dia',f"{len(df)/dias:.1f}" if dias else '—',color='yellow'),metric_card('Período',f"{primeira_data:%d/%m}–{ultima_atualizacao:%d/%m}")])
+    st.markdown(f"<div class='metric-grid'>{cards}</div>",unsafe_allow_html=True)
+    volume=reg.groupby('jogador').agg(Partidas=('id','size'),Dias_ativos=('data','nunique'),Vitórias=('resultado',lambda s:int((s=='V').sum())))
+    volume['Média por dia ativo']=volume['Partidas']/volume['Dias_ativos'];volume['Aproveitamento']=volume['Vitórias']/volume['Partidas']*100
+    st.dataframe(volume.sort_values(['Média por dia ativo','Partidas'],ascending=False).head(25).round(1),use_container_width=True)
+    horario=df['hora_num'].map(faixa_horaria).value_counts().reindex(['Madrugada','Manhã','Tarde','Noite'],fill_value=0)
     st.bar_chart(horario)
 
-    st.markdown("### Estado da descoberta de padrões")
-    if dias_banco < 4:
-        st.warning(
-            "O banco atual cobre apenas uma pequena quantidade de dias. Já é possível analisar confrontos, sequências e volume dentro do dia, mas os padrões de escala, rodízio e retorno precisarão de pelo menos 4 dias distintos para começar a aparecer."
-        )
-    else:
-        st.success("Já existem datas suficientes para iniciar a análise de frequência e rodízio.")
-
-    st.markdown("### Pares que mais se enfrentaram")
-    pares = df.apply(lambda r: " × ".join(sorted([r["jogador_1"], r["jogador_2"]])), axis=1).value_counts().head(20)
-    st.dataframe(pares.rename("Confrontos").to_frame(), use_container_width=True)
+elif pagina=='🗄️ Banco de dados':
+    st.markdown("<div class='section-kicker'>Banco de dados</div><div class='section-sub'>Consulta dos registros brutos utilizados nas análises.</div>",unsafe_allow_html=True)
+    st.dataframe(df.sort_values('data_hora',ascending=False),use_container_width=True,hide_index=True)
 
 else:
-    st.subheader("Histórico geral")
-    geral = df.sort_values(["data_hora", "id"], ascending=False).copy()
-    geral["Data"] = geral["data_hora"].dt.strftime("%d/%m/%Y")
-    geral["Hora"] = geral["data_hora"].dt.strftime("%H:%M")
-    geral["Placar"] = geral["sets_j1"].astype(str) + " x " + geral["sets_j2"].astype(str)
-    st.dataframe(
-        geral[["id", "Data", "Hora", "jogador_1", "jogador_2", "Placar", "vencedor"]].rename(
-            columns={"id": "ID", "jogador_1": "Jogador 1", "jogador_2": "Jogador 2", "vencedor": "Vencedor"}
-        ),
-        use_container_width=True,
-        hide_index=True,
-    )
-
-st.divider()
-st.caption(
-    f"Período atualmente registrado: {primeira_data:%d/%m/%Y %H:%M} a {ultima_atualizacao:%d/%m/%Y %H:%M}. "
-    "As previsões de frequência só serão exibidas quando houver histórico suficiente em datas diferentes."
-)
+    st.markdown("<div class='section-kicker'>Central de inteligência</div><div class='section-sub'>Resumo automático dos sinais mais relevantes encontrados no banco atual.</div>",unsafe_allow_html=True)
+    volume=reg.groupby('jogador').size().sort_values(ascending=False)
+    if not volume.empty: st.markdown(f"<div class='insight ok'>Jogador com maior volume registrado: <b>{esc(volume.index[0])}</b>, com <b>{int(volume.iloc[0])}</b> partidas.</div>",unsafe_allow_html=True)
+    aproveit=reg.groupby('jogador')['resultado'].apply(lambda s:(s=='V').mean()*100).sort_values(ascending=False)
+    if not aproveit.empty: st.markdown(f"<div class='insight ok'>Maior aproveitamento atual: <b>{esc(aproveit.index[0])}</b>, com <b>{aproveit.iloc[0]:.1f}%</b>.</div>",unsafe_allow_html=True)
+    st.markdown("<div class='insight warn'>As previsões de frequência ganharão confiança conforme o banco acumular mais datas diferentes.</div>",unsafe_allow_html=True)
