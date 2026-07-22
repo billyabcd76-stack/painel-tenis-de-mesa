@@ -7,7 +7,7 @@ import pandas as pd
 import streamlit as st
 
 st.set_page_config(
-    page_title="Inteligência do Tênis de Mesa — V1.2",
+    page_title="Inteligência do Tênis de Mesa — V1.3 Contraste Alto",
     page_icon="🏓",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -16,31 +16,184 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    .stApp {background: #07111f; color: #eef4ff;}
-    [data-testid="stSidebar"] {background: #0b1727; border-right: 1px solid #1d3047;}
+    :root {
+        --bg: #050d18;
+        --sidebar: #091728;
+        --card: #102238;
+        --card2: #132a45;
+        --border: #5f7898;
+        --white: #ffffff;
+        --muted: #e7eef8;
+        --pink: #ff4fa3;
+    }
+
+    html, body, [data-testid="stAppViewContainer"], .stApp {
+        background: var(--bg) !important;
+        color: var(--white) !important;
+    }
+    [data-testid="stHeader"] { background: rgba(5,13,24,.98) !important; }
+    [data-testid="stMainBlockContainer"] { color: var(--white) !important; }
+
+    /* TEXTO GERAL — SEM OPACIDADE */
+    .stApp h1, .stApp h2, .stApp h3, .stApp h4,
+    .stApp p, .stApp li, .stApp span, .stApp label,
+    [data-testid="stMarkdownContainer"] * {
+        color: var(--white) !important;
+        opacity: 1 !important;
+    }
+    .stCaptionContainer p, [data-testid="stCaptionContainer"] p {
+        color: var(--muted) !important;
+        opacity: 1 !important;
+        font-weight: 600 !important;
+    }
+
+    /* MENU LATERAL */
+    section[data-testid="stSidebar"], [data-testid="stSidebar"] {
+        background: var(--sidebar) !important;
+        border-right: 2px solid #36577b !important;
+    }
+    section[data-testid="stSidebar"] *, [data-testid="stSidebar"] * {
+        color: #ffffff !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: #ffffff !important;
+    }
+    section[data-testid="stSidebar"] h2 {
+        font-size: 1.25rem !important;
+        font-weight: 900 !important;
+        letter-spacing: .01em !important;
+    }
+    section[data-testid="stSidebar"] div[role="radiogroup"] > label,
+    section[data-testid="stSidebar"] [data-baseweb="radio"] {
+        background: #12263e !important;
+        border: 1px solid #557596 !important;
+        border-radius: 12px !important;
+        padding: 12px 14px !important;
+        margin: 0 0 9px 0 !important;
+        min-height: 48px !important;
+    }
+    section[data-testid="stSidebar"] div[role="radiogroup"] > label p,
+    section[data-testid="stSidebar"] [data-baseweb="radio"] p,
+    section[data-testid="stSidebar"] label span {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+        opacity: 1 !important;
+        font-size: 1rem !important;
+        font-weight: 900 !important;
+        text-shadow: 0 1px 1px #000 !important;
+    }
+    section[data-testid="stSidebar"] div[role="radiogroup"] > label:hover {
+        background: #1a395c !important;
+        border-color: #a7c7e8 !important;
+    }
+    section[data-testid="stSidebar"] div[role="radiogroup"] > label:has(input:checked),
+    section[data-testid="stSidebar"] [data-baseweb="radio"]:has(input:checked) {
+        background: linear-gradient(90deg,#c51f68,#663184) !important;
+        border: 2px solid #ff86bd !important;
+    }
+
+    /* CARDS E NÚMEROS */
     div[data-testid="stMetric"] {
-        background: #0e1b2d;
-        border: 1px solid #26384e;
-        padding: 14px;
-        border-radius: 14px;
+        background: var(--card) !important;
+        border: 1px solid var(--border) !important;
+        padding: 16px !important;
+        border-radius: 14px !important;
+        opacity: 1 !important;
     }
-    .status-box {
-        padding: 12px 14px;
-        border: 1px solid #26384e;
-        border-radius: 12px;
-        background: #0e1b2d;
-        margin: 6px 0;
+    div[data-testid="stMetric"] * { opacity: 1 !important; }
+    div[data-testid="stMetric"] [data-testid="stMetricLabel"],
+    div[data-testid="stMetric"] [data-testid="stMetricLabel"] p,
+    div[data-testid="stMetric"] label {
+        color: #f3f7fc !important;
+        -webkit-text-fill-color: #f3f7fc !important;
+        font-size: .98rem !important;
+        font-weight: 800 !important;
     }
-    .insight {
-        padding: 13px 15px;
-        border-left: 4px solid #55c2ff;
-        border-radius: 8px;
-        background: #0e1b2d;
-        margin: 8px 0;
+    div[data-testid="stMetric"] [data-testid="stMetricValue"],
+    div[data-testid="stMetric"] [data-testid="stMetricValue"] > div {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+        font-size: 2.15rem !important;
+        font-weight: 900 !important;
+        line-height: 1.15 !important;
+        text-shadow: 0 1px 2px #000 !important;
     }
-    .warning-insight {border-left-color: #f5b642;}
-    .ok-insight {border-left-color: #48c78e;}
-    .muted {color: #a9b8ca; font-size: .92rem;}
+    div[data-testid="stMetric"] [data-testid="stMetricDelta"],
+    div[data-testid="stMetric"] [data-testid="stMetricDelta"] * {
+        color: #dcecff !important;
+        -webkit-text-fill-color: #dcecff !important;
+        opacity: 1 !important;
+        font-weight: 700 !important;
+    }
+
+    /* ABAS */
+    [data-baseweb="tab-list"] { gap: 8px !important; }
+    [data-baseweb="tab-list"] button {
+        background: #102238 !important;
+        border: 1px solid #4e7095 !important;
+        border-radius: 10px 10px 0 0 !important;
+    }
+    [data-baseweb="tab-list"] button *, [data-baseweb="tab-list"] button p {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+        opacity: 1 !important;
+        font-weight: 900 !important;
+    }
+    [data-baseweb="tab-list"] button[aria-selected="true"] {
+        background: #b92265 !important;
+        border-color: #ff86bd !important;
+    }
+
+    /* CAMPOS */
+    [data-baseweb="select"] > div, [data-baseweb="input"] > div,
+    .stTextInput input, .stSelectbox div[data-baseweb="select"] > div {
+        background: #ffffff !important;
+        color: #09111c !important;
+        -webkit-text-fill-color: #09111c !important;
+        border: 2px solid #b6c8da !important;
+        opacity: 1 !important;
+    }
+    [data-baseweb="select"] *, [data-baseweb="popover"] * {
+        color: #09111c !important;
+        -webkit-text-fill-color: #09111c !important;
+        opacity: 1 !important;
+        font-weight: 700 !important;
+    }
+
+    /* TABELAS */
+    [data-testid="stDataFrame"], [data-testid="stTable"] {
+        background: var(--card) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 12px !important;
+    }
+    [data-testid="stDataFrame"] *, [data-testid="stTable"] * {
+        opacity: 1 !important;
+    }
+
+    .status-box, .insight {
+        background: var(--card2) !important;
+        color: #ffffff !important;
+        border: 1px solid #557596 !important;
+        border-radius: 12px !important;
+        padding: 13px 15px !important;
+        margin: 7px 0 !important;
+        font-weight: 800 !important;
+        opacity: 1 !important;
+    }
+    .insight { border-left: 5px solid #55c2ff !important; }
+    .warning-insight { border-left-color: #ffc14d !important; }
+    .ok-insight { border-left-color: #4ee19a !important; }
+    .muted { color: #e7eef8 !important; opacity: 1 !important; }
+
+    .version-badge {
+        display:inline-block;
+        background:#ff4fa3;
+        color:#ffffff !important;
+        font-weight:900;
+        padding:7px 12px;
+        border-radius:999px;
+        margin:0 0 10px 0;
+        border:1px solid #ffafd4;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -386,8 +539,9 @@ st.sidebar.caption(
     f"Atualizado até {ultima_atualizacao:%d/%m/%Y %H:%M}"
 )
 
+st.markdown('<div class="version-badge">V1.3 — CONTRASTE ALTO</div>', unsafe_allow_html=True)
 st.title("🏓 Inteligência do Tênis de Mesa")
-st.caption("Versão 1.2 • confronto inteligente, momento, volume e padrões progressivos.")
+st.caption("Versão 1.2.1 • contraste corrigido para melhor leitura.")
 
 with st.container():
     st.markdown(
