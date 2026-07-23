@@ -1,103 +1,31 @@
-﻿id,data,hora,dia_semana,jogador_1,jogador_2,sets_j1,sets_j2
-4806,2026-07-15,00:05,Quarta-feira,Jerzy Michalik,Dawid Pyrek,1,3
-4642,2026-07-15,00:10,Quarta-feira,Jakub Nowak,Marian Lebek,0,3
-1142,2026-07-15,00:15,Quarta-feira,Mateusz Sikon,Pawel Slosarczyk,3,0
-3081,2026-07-15,00:15,Quarta-feira,Maciej Kolek,Jakub Glanowski,3,2
-7161,2026-07-15,00:15,Quarta-feira,Stapor Rafal,Karol Sulkowski,1,3
-8249,2026-07-15,00:15,Quarta-feira,Dimitrij Prokopcov,Szymon Kolasa,0,3
-3406,2026-07-15,00:30,Quarta-feira,Rafal Gajda,Karol Jablonski,3,2
-9360,2026-07-15,00:35,Quarta-feira,Dawid Kosmal,Jakub Glanowski,2,3
-9429,2026-07-15,00:35,Quarta-feira,Rafal Idaczyk,Robert Szymik,3,2
-2002,2026-07-15,00:40,Quarta-feira,Kamil Rudomina,Bartek Sulkowski,2,3
-8193,2026-07-15,00:40,Quarta-feira,Pawel Adamus,Pawel Kurek,2,3
-8872,2026-07-15,00:40,Quarta-feira,Artur Grela,Adrian Wiecek,3,2
-8726,2026-07-15,00:55,Quarta-feira,Michal Oracz,Kacper Adamus,1,3
-2432,2026-07-15,01:00,Quarta-feira,Grzegorz Poliniewicz,Maciej Kolek,3,1
-8353,2026-07-15,01:00,Quarta-feira,Michal Paszkiewicz,Jakub Nowak,1,3
-1848,2026-07-15,01:05,Quarta-feira,Marcin Jadczyk,Dawid Michna,3,1
-4644,2026-07-15,01:05,Quarta-feira,Andrzej Krezel,Sebastian Szostok,1,3
-9603,2026-07-15,01:05,Quarta-feira,Stapor Rafal,Bartek Sulkowski,1,3
-7340,2026-07-15,01:20,Quarta-feira,Sebastian Juzek,Kamil Smolka,1,3
-3744,2026-07-15,01:25,Quarta-feira,Lukasz Oracz,Marian Lebek,3,0
-6178,2026-07-15,01:25,Quarta-feira,Dawid Kosmal,Maciej Kolek,3,1
-3486,2026-07-15,01:30,Quarta-feira,Mateusz Sikon,Pawel Kurek,3,1
-4022,2026-07-15,01:30,Quarta-feira,Dimitrij Prokopcov,Adrian Wiecek,1,3
-7841,2026-07-15,01:30,Quarta-feira,Karol Sulkowski,Kamil Rudomina,0,3
-2492,2026-07-15,01:45,Quarta-feira,Rafal Idaczyk,Jakub Nowak,3,2
-3872,2026-07-15,01:45,Quarta-feira,Rafal Gajda,Michal Oracz,3,1
-1493,2026-07-15,01:50,Quarta-feira,Jakub Glanowski,Grzegorz Poliniewicz,3,2
-2793,2026-07-15,01:55,Quarta-feira,Artur Grela,Marcin Jadczyk,3,1
-3336,2026-07-15,01:55,Quarta-feira,Pawel Adamus,Andrzej Krezel,1,3
-5408,2026-07-15,01:55,Quarta-feira,Stapor Rafal,Kamil Rudomina,2,3
-3142,2026-07-15,02:10,Quarta-feira,Michal Paszkiewicz,Lukasz Oracz,1,3
-6605,2026-07-15,02:10,Quarta-feira,Kamil Smolka,Karol Jablonski,2,3
-3133,2026-07-15,02:15,Quarta-feira,Dawid Kosmal,Grzegorz Poliniewicz,0,3
-1730,2026-07-15,02:20,Quarta-feira,Dawid Michna,Szymon Kolasa,2,3
-5748,2026-07-15,02:20,Quarta-feira,Sebastian Szostok,Pawel Slosarczyk,2,3
-6816,2026-07-15,02:20,Quarta-feira,Bartek Sulkowski,Karol Sulkowski,2,3
-9002,2026-07-15,02:30,Quarta-feira,Sebastian Juzek,Kacper Adamus,3,1
-5066,2026-07-15,02:35,Quarta-feira,Marian Lebek,Robert Szymik,3,2
-4067,2026-07-15,02:40,Quarta-feira,Maciej Kolek,Jakub Glanowski,1,3
-1998,2026-07-15,02:45,Quarta-feira,Mateusz Sikon,Andrzej Krezel,3,1
-5521,2026-07-15,02:45,Quarta-feira,Dimitrij Prokopcov,Marcin Jadczyk,0,3
-7286,2026-07-15,02:55,Quarta-feira,Michal Oracz,Karol Jablonski,3,1
-5698,2026-07-15,03:00,Quarta-feira,Rafal Idaczyk,Lukasz Oracz,1,3
-8098,2026-07-15,03:05,Quarta-feira,Dawid Kosmal,Jakub Glanowski,3,1
-9678,2026-07-15,03:05,Quarta-feira,Adrian Wiecek,Szymon Kolasa,2,3
-2189,2026-07-15,03:10,Quarta-feira,Pawel Kurek,Pawel Slosarczyk,3,1
-7424,2026-07-15,03:20,Quarta-feira,Jakub Nowak,Robert Szymik,1,3
-9976,2026-07-15,03:20,Quarta-feira,Rafal Gajda,Sebastian Juzek,0,3
-2108,2026-07-15,03:30,Quarta-feira,Grzegorz Poliniewicz,Maciej Kolek,3,2
-5025,2026-07-15,03:30,Quarta-feira,Artur Grela,Dawid Michna,3,2
-7550,2026-07-15,03:35,Quarta-feira,Pawel Adamus,Sebastian Szostok,3,2
-1470,2026-07-15,03:45,Quarta-feira,Michal Paszkiewicz,Marian Lebek,1,3
-2970,2026-07-15,03:45,Quarta-feira,Kamil Smolka,Kacper Adamus,3,1
-2932,2026-07-15,04:00,Quarta-feira,Adrian Wiecek,Krystian Kolodziej,3,0
-3489,2026-07-15,04:00,Quarta-feira,Michal Minda,Dominik Solilo,3,1
-3773,2026-07-15,04:00,Quarta-feira,Szymon Sporek,Karol Wisniewski,1,3
-3968,2026-07-15,04:00,Quarta-feira,Andrzej Krezel,Pawel Slosarczyk,2,3
-2454,2026-07-15,04:05,Quarta-feira,Michal Oracz,Sebastian Juzek,1,3
-3469,2026-07-15,04:20,Quarta-feira,Artur Grela,Jakub Folwarski,2,3
-4013,2026-07-15,04:20,Quarta-feira,Maciej Nowalinski,Artur Daniel,3,2
-3361,2026-07-15,04:25,Quarta-feira,Jakub Zochniak,Kamil Rudomina,3,1
-7352,2026-07-15,04:25,Quarta-feira,Mateusz Sikon,Sebastian Szostok,2,3
-9611,2026-07-15,04:30,Quarta-feira,Rafal Gajda,Kamil Smolka,2,3
-7087,2026-07-15,04:40,Quarta-feira,Dawid Michna,Marcin Jadczyk,3,1
-2104,2026-07-15,04:45,Quarta-feira,Dimitrij Prokopcov,Szymon Kolasa,3,1
-4236,2026-07-15,04:50,Quarta-feira,Bartek Sulkowski,Dawid Kosmal,1,3
-4521,2026-07-15,04:50,Quarta-feira,Pawel Kurek,Pawel Adamus,3,0
-8638,2026-07-15,04:55,Quarta-feira,Kacper Adamus,Karol Jablonski,3,2
-4791,2026-07-15,05:00,Quarta-feira,Adrian Wiecek,Artur Grela,3,2
-1143,2026-07-15,05:05,Quarta-feira,Szymon Sporek,Maciej Nowalinski,3,2
-3294,2026-07-15,05:10,Quarta-feira,Michal Minda,Jakub Zochniak,3,1
-9786,2026-07-15,05:10,Quarta-feira,Andrzej Krezel,Mateusz Sikon,2,3
-7095,2026-07-15,05:20,Quarta-feira,Michal Oracz,Kamil Smolka,0,3
-8123,2026-07-15,05:25,Quarta-feira,Marcin Jadczyk,Krystian Kolodziej,3,1
-4112,2026-07-15,05:30,Quarta-feira,Szymon Kolasa,Karol Wisniewski,3,1
-4134,2026-07-15,05:35,Quarta-feira,Dawid Kosmal,Dominik Solilo,1,3
-5260,2026-07-15,05:35,Quarta-feira,Pawel Adamus,Pawel Slosarczyk,1,3
-7274,2026-07-15,05:40,Quarta-feira,Sebastian Juzek,Karol Jablonski,1,3
-9505,2026-07-15,05:50,Quarta-feira,Dawid Michna,Jakub Folwarski,2,3
-5929,2026-07-15,05:55,Quarta-feira,Dimitrij Prokopcov,Artur Daniel,0,3
-2339,2026-07-15,06:00,Quarta-feira,Pawel Kurek,Sebastian Szostok,3,2
-2459,2026-07-15,06:00,Quarta-feira,Bartek Sulkowski,Kamil Rudomina,3,0
-6238,2026-07-15,06:05,Quarta-feira,Rafal Gajda,Kacper Adamus,2,3
-7925,2026-07-15,06:15,Quarta-feira,Artur Grela,Krystian Kolodziej,3,1
-3127,2026-07-15,06:20,Quarta-feira,Maciej Nowalinski,Karol Wisniewski,3,1
-2599,2026-07-15,06:25,Quarta-feira,Jakub Zochniak,Dominik Solilo,3,0
-6944,2026-07-15,06:25,Quarta-feira,Mateusz Sikon,Pawel Slosarczyk,3,0
-5166,2026-07-15,06:30,Quarta-feira,Kamil Smolka,Karol Jablonski,0,3
-1129,2026-07-15,06:40,Quarta-feira,Adrian Wiecek,Dawid Michna,3,1
-3323,2026-07-15,06:45,Quarta-feira,Szymon Sporek,Dimitrij Prokopcov,2,3
-3875,2026-07-15,06:50,Quarta-feira,Michal Minda,Bartek Sulkowski,1,3
-7236,2026-07-15,06:50,Quarta-feira,Andrzej Krezel,Pawel Kurek,1,3
-6939,2026-07-15,06:55,Quarta-feira,Michal Oracz,Kacper Adamus,3,2
-7245,2026-07-15,07:05,Quarta-feira,Marcin Jadczyk,Jakub Folwarski,3,2
-1476,2026-07-15,07:10,Quarta-feira,Szymon Kolasa,Artur Daniel,3,2
-1857,2026-07-15,07:15,Quarta-feira,Pawel Adamus,Sebastian Szostok,2,3
-8340,2026-07-15,07:15,Quarta-feira,Dawid Kosmal,Kamil Rudomina,3,0
-7161,2026-07-15,07:20,Quarta-feira,Sebastian Juzek,Rafal Gajda,3,1
-4297,2026-07-15,07:30,Quarta-feira,Artur Grela,Dawid Michna,2,3
-8316,2026-07-15,07:35,Quarta-feira,Maciej Nowalinski,Dimitrij Prokopcov,3,0
-4057,2026-07-15,07:40,Quarta-feira,Jakub Zochniak,Bartek Sulkowski,3,2
-5221,2026-07-15,07:40,Quarta-feira,Mateusz Sikon,Pawel Kurek,2,3
+﻿ID Partida,Lote,Data,Horário,Ordem Entrada,Jogador 1,Jogador 2,Sets J1,Sets J2,Vencedor,Qtd. Sets,Total Pontos,Pontos J1,Pontos J2,Margem J1,Resultado J1,Chave Exata,Chave Conferência,Status
+P000001,L001,15/07/2026,06:10,1,Dronova Ulana,Svitlana Yureneva,3,0,Dronova Ulana,3,60,35,25,10,Vitória,15072026-0610-Dronova Ulana-Svitlana Yureneva,15072026-0610-Dronova Ulana|Svitlana Yureneva,Validada
+P000002,L001,15/07/2026,06:40,2,Plashchynska Anhelina,Nadiia Harmash,3,0,Plashchynska Anhelina,3,63,36,27,9,Vitória,15072026-0640-Plashchynska Anhelina-Nadiia Harmash,15072026-0640-Nadiia Harmash|Plashchynska Anhelina,Validada
+P000003,L001,15/07/2026,07:10,3,Yana Mykhailyk,Svitlana Yureneva,0,3,Svitlana Yureneva,3,54,21,33,-12,Derrota,15072026-0710-Yana Mykhailyk-Svitlana Yureneva,15072026-0710-Svitlana Yureneva|Yana Mykhailyk,Validada
+P000004,L001,15/07/2026,08:10,4,Dronova Ulana,Plashchynska Anhelina,2,3,Plashchynska Anhelina,5,98,47,51,-4,Derrota,15072026-0810-Dronova Ulana-Plashchynska Anhelina,15072026-0810-Dronova Ulana|Plashchynska Anhelina,Validada
+P000005,L001,15/07/2026,08:40,5,Yana Mykhailyk,Nadiia Harmash,3,2,Yana Mykhailyk,5,112,55,57,-2,Vitória,15072026-0840-Yana Mykhailyk-Nadiia Harmash,15072026-0840-Nadiia Harmash|Yana Mykhailyk,Validada
+P000006,L001,15/07/2026,09:10,6,Plashchynska Anhelina,Svitlana Yureneva,3,1,Plashchynska Anhelina,4,84,46,38,8,Vitória,15072026-0910-Plashchynska Anhelina-Svitlana Yureneva,15072026-0910-Plashchynska Anhelina|Svitlana Yureneva,Validada
+P000007,L001,15/07/2026,10:10,7,Yana Mykhailyk,Plashchynska Anhelina,1,3,Plashchynska Anhelina,4,77,36,41,-5,Derrota,15072026-1010-Yana Mykhailyk-Plashchynska Anhelina,15072026-1010-Plashchynska Anhelina|Yana Mykhailyk,Validada
+P000008,L001,15/07/2026,10:40,8,Dronova Ulana,Nadiia Harmash,3,0,Dronova Ulana,3,49,33,16,17,Vitória,15072026-1040-Dronova Ulana-Nadiia Harmash,15072026-1040-Dronova Ulana|Nadiia Harmash,Validada
+P000009,L001,15/07/2026,11:40,9,Yana Mykhailyk,Dronova Ulana,2,3,Dronova Ulana,5,93,41,52,-11,Derrota,15072026-1140-Yana Mykhailyk-Dronova Ulana,15072026-1140-Dronova Ulana|Yana Mykhailyk,Validada
+P000010,L001,15/07/2026,23:30,10,Anna Rzhevska,Alina Kurtenko,0,3,Alina Kurtenko,3,60,26,34,-8,Derrota,15072026-2330-Anna Rzhevska-Alina Kurtenko,15072026-2330-Alina Kurtenko|Anna Rzhevska,Validada
+P000011,L002,16/07/2026,00:00,11,Victoria Kurtenko,Yana Mykhailyk,0,3,Yana Mykhailyk,3,67,29,38,-9,Derrota,16072026-0000-Victoria Kurtenko-Yana Mykhailyk,16072026-0000-Victoria Kurtenko|Yana Mykhailyk,Validada
+P000012,L002,16/07/2026,00:30,12,Dronova Ulana,Svitlana Yureneva,3,0,Dronova Ulana,3,56,33,23,10,Vitória,16072026-0030-Dronova Ulana-Svitlana Yureneva,16072026-0030-Dronova Ulana|Svitlana Yureneva,Validada
+P000013,L002,16/07/2026,01:00,13,Anna Rzhevska,Yana Mykhailyk,1,3,Yana Mykhailyk,4,74,31,43,-12,Derrota,16072026-0100-Anna Rzhevska-Yana Mykhailyk,16072026-0100-Anna Rzhevska|Yana Mykhailyk,Validada
+P000014,L002,16/07/2026,01:30,14,Svitlana Yureneva,Alina Kurtenko,0,3,Alina Kurtenko,3,50,17,33,-16,Derrota,16072026-0130-Svitlana Yureneva-Alina Kurtenko,16072026-0130-Alina Kurtenko|Svitlana Yureneva,Validada
+P000015,L002,16/07/2026,02:00,15,Victoria Kurtenko,Dronova Ulana,0,3,Dronova Ulana,3,41,8,33,-25,Derrota,16072026-0200-Victoria Kurtenko-Dronova Ulana,16072026-0200-Dronova Ulana|Victoria Kurtenko,Validada
+P000016,L002,16/07/2026,02:30,16,Anna Rzhevska,Svitlana Yureneva,1,3,Svitlana Yureneva,4,81,38,43,-5,Derrota,16072026-0230-Anna Rzhevska-Svitlana Yureneva,16072026-0230-Anna Rzhevska|Svitlana Yureneva,Validada
+P000017,L002,16/07/2026,03:00,17,Dronova Ulana,Yana Mykhailyk,3,0,Dronova Ulana,3,48,33,15,18,Vitória,16072026-0300-Dronova Ulana-Yana Mykhailyk,16072026-0300-Dronova Ulana|Yana Mykhailyk,Validada
+P000018,L002,16/07/2026,03:30,18,Victoria Kurtenko,Alina Kurtenko,2,3,Alina Kurtenko,5,89,41,48,-7,Derrota,16072026-0330-Victoria Kurtenko-Alina Kurtenko,16072026-0330-Alina Kurtenko|Victoria Kurtenko,Validada
+P000019,L002,16/07/2026,04:00,19,Anna Rzhevska,Dronova Ulana,3,1,Anna Rzhevska,4,59,40,19,21,Vitória,16072026-0400-Anna Rzhevska-Dronova Ulana,16072026-0400-Anna Rzhevska|Dronova Ulana,Validada
+P000020,L002,16/07/2026,04:30,20,Victoria Kurtenko,Svitlana Yureneva,3,1,Victoria Kurtenko,4,74,42,32,10,Vitória,16072026-0430-Victoria Kurtenko-Svitlana Yureneva,16072026-0430-Svitlana Yureneva|Victoria Kurtenko,Validada
+P000021,L003,16/07/2026,05:00,21,Yana Mykhailyk,Alina Kurtenko,3,1,Yana Mykhailyk,4,71,39,32,7,Vitória,16072026-0500-Yana Mykhailyk-Alina Kurtenko,16072026-0500-Alina Kurtenko|Yana Mykhailyk,Validada
+P000022,L003,16/07/2026,05:30,22,Anna Rzhevska,Victoria Kurtenko,3,0,Anna Rzhevska,3,68,37,31,6,Vitória,16072026-0530-Anna Rzhevska-Victoria Kurtenko,16072026-0530-Anna Rzhevska|Victoria Kurtenko,Validada
+P000023,L003,16/07/2026,06:00,23,Dronova Ulana,Alina Kurtenko,3,2,Dronova Ulana,5,93,49,44,5,Vitória,16072026-0600-Dronova Ulana-Alina Kurtenko,16072026-0600-Alina Kurtenko|Dronova Ulana,Validada
+P000024,L003,16/07/2026,06:30,24,Svitlana Yureneva,Yana Mykhailyk,0,3,Yana Mykhailyk,3,66,30,36,-6,Derrota,16072026-0630-Svitlana Yureneva-Yana Mykhailyk,16072026-0630-Svitlana Yureneva|Yana Mykhailyk,Validada
+P000025,L003,17/07/2026,07:35,25,Kateryna Bondarenko,Gorchakova Anna,3,0,Kateryna Bondarenko,3,58,35,23,12,Vitória,17072026-0735-Kateryna Bondarenko-Gorchakova Anna,17072026-0735-Gorchakova Anna|Kateryna Bondarenko,Validada
+P000026,L003,17/07/2026,08:05,26,Shevchuk Viktoria,Margarita Gordeets,1,3,Margarita Gordeets,4,81,38,43,-5,Derrota,17072026-0805-Shevchuk Viktoria-Margarita Gordeets,17072026-0805-Margarita Gordeets|Shevchuk Viktoria,Validada
+P000027,L003,17/07/2026,08:35,27,Oleksandra Ivchenko,Anastasiya Volgina,0,3,Anastasiya Volgina,3,54,21,33,-12,Derrota,17072026-0835-Oleksandra Ivchenko-Anastasiya Volgina,17072026-0835-Anastasiya Volgina|Oleksandra Ivchenko,Validada
+P000028,L003,17/07/2026,09:05,28,Kateryna Bondarenko,Margarita Gordeets,1,3,Margarita Gordeets,4,68,29,39,-10,Derrota,17072026-0905-Kateryna Bondarenko-Margarita Gordeets,17072026-0905-Kateryna Bondarenko|Margarita Gordeets,Validada
+P000029,L003,17/07/2026,09:35,29,Anastasiya Volgina,Gorchakova Anna,3,2,Anastasiya Volgina,5,98,51,47,4,Vitória,17072026-0935-Anastasiya Volgina-Gorchakova Anna,17072026-0935-Anastasiya Volgina|Gorchakova Anna,Validada
+P000030,L003,17/07/2026,10:05,30,Shevchuk Viktoria,Oleksandra Ivchenko,2,3,Oleksandra Ivchenko,5,97,47,50,-3,Derrota,17072026-1005-Shevchuk Viktoria-Oleksandra Ivchenko,17072026-1005-Oleksandra Ivchenko|Shevchuk Viktoria,Validada
