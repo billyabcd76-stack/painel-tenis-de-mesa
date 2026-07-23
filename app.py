@@ -10,23 +10,45 @@ st.markdown('''
 <style>
 :root{--bg:#050B14;--panel:#0B1625;--line:#1D3047;--text:#F8FAFC;--muted:#91A4BC;--purple:#6D4AFF;--green:#22C55E;--red:#EF4444;--orange:#F59E0B}
 .stApp{background:linear-gradient(180deg,#030812 0%,#08111E 100%)}
-.block-container{max-width:1700px;padding-top:1rem;padding-bottom:2rem}
-[data-testid="stSidebar"]{background:linear-gradient(180deg,#050D18,#071321);border-right:1px solid #17283D}
-[data-testid="stSidebar"] *{color:#EAF1FB}
+.block-container{max-width:1700px;padding:1rem 1.15rem 2rem 1.15rem!important;overflow:visible!important}
+[data-testid="stSidebar"]{background:linear-gradient(180deg,#050D18,#071321);border-right:1px solid #17283D;min-width:245px!important;max-width:245px!important}
+[data-testid="stSidebar"] *{color:#F4F8FF!important;opacity:1!important;text-shadow:none!important}[data-testid="stSidebar"] .stRadio label{padding:.48rem .55rem!important;border-radius:8px!important;white-space:normal!important;line-height:1.2!important}
 h1,h2,h3,h4,p,label,span{color:var(--text)}
 div[data-testid="stMetric"]{background:linear-gradient(180deg,#0E1D30,#0A1524);border:1px solid #1D334D;padding:14px 16px;border-radius:13px;min-height:116px;box-shadow:0 12px 30px rgba(0,0,0,.24)}
 div[data-testid="stMetricLabel"]{color:#B5C3D5;font-size:.77rem;text-transform:uppercase}
 div[data-testid="stMetricValue"]{color:#FFF;font-weight:850}
-div[data-baseweb="select"]>div,div[data-baseweb="input"]>div{background:#0B1625!important;border:1px solid #28415E!important;border-radius:10px!important;color:white!important}input{color:white!important}
+div[data-baseweb="select"]>div,div[data-baseweb="input"]>div{background:#0B1625!important;border:1px solid #36516F!important;border-radius:10px!important;color:#FFFFFF!important;opacity:1!important;box-shadow:none!important}div[data-baseweb="select"] *{color:#FFFFFF!important;opacity:1!important}div[data-baseweb="select"] svg{fill:#FFFFFF!important;color:#FFFFFF!important;opacity:1!important}input{color:#FFFFFF!important;opacity:1!important}[data-baseweb="popover"]{background:#0B1625!important}[role="listbox"]{background:#0B1625!important;color:#FFFFFF!important}[role="option"]{background:#0B1625!important;color:#FFFFFF!important;opacity:1!important}[role="option"]:hover{background:#17304E!important}
 .hero-kicker{color:#B7C4D4;font-size:.85rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em}.hero-title{font-size:2rem;line-height:1.05;font-weight:900;color:#FFF}.hero-sub{color:#91A4BC;margin-top:.35rem}
 .panel{background:linear-gradient(180deg,#0D1929,#091421);border:1px solid #1D334D;border-radius:14px;padding:15px;box-shadow:0 12px 28px rgba(0,0,0,.20);height:100%}.panel-title{font-weight:850;color:#F8FAFC;font-size:.94rem;text-transform:uppercase;margin-bottom:12px}.panel-sub{color:#8296AE;font-size:.78rem;margin-top:-7px;margin-bottom:10px}
-.history-wrap{background:linear-gradient(180deg,#0C1828,#09131F);border:1px solid #1D334D;border-radius:14px;overflow:hidden}.history-head{display:grid;grid-template-columns:120px 86px minmax(210px,1fr) 88px 90px 34px;gap:10px;padding:13px 16px;color:#91A4BC;font-size:.72rem;font-weight:800;text-transform:uppercase;border-bottom:1px solid #1D3047}.match-row{display:grid;grid-template-columns:120px 86px minmax(210px,1fr) 88px 90px 34px;gap:10px;align-items:center;padding:12px 16px;border-bottom:1px solid #182A3E}.match-row:hover{background:#101F32}.match-date,.match-time{color:#E6EEF8;font-size:.9rem}.opponent{color:#FFF;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.avatar{display:inline-flex;width:25px;height:25px;border-radius:50%;align-items:center;justify-content:center;margin-right:8px;background:#1E4E8C;color:#FFF;font-size:.72rem}.score{color:#FFF;font-weight:850;font-size:1rem;text-align:center}.result-badge{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#FFF;font-weight:900;margin:auto}.result-win{background:linear-gradient(180deg,#22A447,#14843A)}.result-loss{background:linear-gradient(180deg,#EF3F3F,#BE2020)}.arrow{color:#6D86A3;font-size:1.2rem;text-align:right}
+.history-wrap{background:linear-gradient(180deg,#0C1828,#09131F);border:1px solid #1D334D;border-radius:14px;overflow-x:auto!important;overflow-y:hidden!important;width:100%!important}.history-head{display:grid;grid-template-columns:96px 62px minmax(125px,1fr) 58px 56px 14px;gap:6px;padding:11px 12px;color:#B7C6D8;font-size:.68rem;font-weight:900;text-transform:uppercase;border-bottom:1px solid #1D3047;min-width:470px}.match-row{display:grid;grid-template-columns:96px 62px minmax(125px,1fr) 58px 56px 14px;gap:6px;align-items:center;padding:10px 12px;border-bottom:1px solid #182A3E;min-width:470px}.match-row:hover{background:#101F32}.match-date,.match-time{color:#F4F8FF;font-size:.78rem;font-weight:650;white-space:nowrap}.opponent{color:#FFF;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.80rem;min-width:0}.avatar{display:inline-flex;width:23px;height:23px;border-radius:50%;align-items:center;justify-content:center;margin-right:6px;background:#1E62A9;color:#FFF!important;font-size:.62rem;font-weight:900;opacity:1!important;flex:0 0 auto}.score{color:#FFF;font-weight:900;font-size:.88rem;text-align:center;white-space:nowrap}.result-badge{width:29px;height:29px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#FFF!important;font-weight:900;margin:auto;opacity:1!important;box-shadow:0 0 0 2px rgba(255,255,255,.06)}.result-win{background:linear-gradient(180deg,#22A447,#14843A)}.result-loss{background:linear-gradient(180deg,#EF3F3F,#BE2020)}.arrow{color:#6D86A3;font-size:1.2rem;text-align:right}
 .form-strip{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 4px}.form-dot{width:25px;height:25px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;color:white}.form-win{background:#178C45}.form-loss{background:#CF2D2D}
-.set-row{display:grid;grid-template-columns:62px 1fr 48px 48px 54px 84px;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid #182B40}.set-row:last-child{border-bottom:none}.set-name{font-weight:800;color:#FFF}.set-num,.set-pct,.set-avg{color:#EAF1FB;font-size:.84rem;text-align:center}.progress{height:5px;border-radius:99px;background:#17273A;overflow:hidden;margin-top:5px}.progress>span{display:block;height:100%;border-radius:99px}
-.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.score-column{background:#0A1522;border:1px solid #1B3048;border-radius:10px;padding:12px}.score-title{font-size:.74rem;font-weight:900;text-transform:uppercase;margin-bottom:8px}.score-line{display:grid;grid-template-columns:42px 1fr 38px;gap:8px;align-items:center;margin:9px 0}.score-label{font-weight:850;color:#FFF}.score-count{color:#B7C6D8;text-align:right;font-size:.82rem}.mini-bar{height:5px;border-radius:99px;background:#182A3E;overflow:hidden}.mini-bar span{display:block;height:100%;border-radius:99px}
-.first-card{border-radius:12px;padding:15px;border:1px solid #24405D;background:#0A1624}.first-card.good{background:linear-gradient(180deg,#10271D,#0B1B16);border-color:#214C35}.first-card.bad{background:linear-gradient(180deg,#2B1619,#1B1014);border-color:#4B2329}.first-icon{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1.15rem;font-weight:900;float:left;margin-right:12px}.first-value{font-size:1.55rem;font-weight:900;color:#FFF}.first-label{font-size:.78rem;font-weight:850;color:#EAF1FB;text-transform:uppercase}.first-sub{font-size:.78rem;color:#91A4BC;margin-top:3px}
+.set-row{display:grid;grid-template-columns:58px minmax(28px,1fr) 34px 34px 48px 72px;align-items:center;gap:5px;padding:8px 0;border-bottom:1px solid #182B40;min-width:0}.set-row:last-child{border-bottom:none}.set-name{font-weight:800;color:#FFF}.set-num,.set-pct,.set-avg{color:#F4F8FF;font-size:.72rem;text-align:center;white-space:nowrap;opacity:1!important}.progress{height:5px;border-radius:99px;background:#17273A;overflow:hidden;margin-top:5px}.progress>span{display:block;height:100%;border-radius:99px}
+.score-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.score-column{background:#0A1522;border:1px solid #1B3048;border-radius:10px;padding:12px}.score-title{font-size:.74rem;font-weight:900;text-transform:uppercase;margin-bottom:8px}.score-line{display:grid;grid-template-columns:42px 1fr 38px;gap:8px;align-items:center;margin:9px 0}.score-label{font-weight:850;color:#FFF}.score-count{color:#B7C6D8;text-align:right;font-size:.82rem}.mini-bar{height:5px;border-radius:99px;background:#182A3E;overflow:hidden}.mini-bar span{display:block;height:100%;border-radius:99px}
+.first-card{border-radius:12px;padding:15px;border:1px solid #24405D;background:#0A1624}.first-card.good{background:linear-gradient(180deg,#10271D,#0B1B16);border-color:#214C35}.first-card.bad{background:linear-gradient(180deg,#2B1619,#1B1014);border-color:#4B2329}.first-icon{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1.15rem;font-weight:900;float:left;margin-right:12px}.first-value{font-size:1.18rem;font-weight:900;color:#FFF;white-space:nowrap}.first-label{font-size:.78rem;font-weight:850;color:#EAF1FB;text-transform:uppercase}.first-sub{font-size:.78rem;color:#91A4BC;margin-top:3px}
 .analysis-box{border-radius:12px;border:1px solid #6D4AFF;background:linear-gradient(135deg,rgba(50,29,103,.34),rgba(10,20,35,.96));padding:16px}.analysis-title{font-weight:900;color:#FFF;margin-bottom:7px}.analysis-text{color:#C7D3E2;line-height:1.5}
 .stTabs [data-baseweb="tab"]{background:#0B1625;border:1px solid #1D334D;color:#A6B8CD;border-radius:8px 8px 0 0}.stTabs [aria-selected="true"]{background:#21165A!important;color:#FFF!important;border-color:#6D4AFF!important}
+
+[data-testid="stDataFrame"]{background:#0B1625!important;border:1px solid #1D334D!important;border-radius:12px!important;overflow:auto!important}
+[data-testid="stDataFrame"] *{opacity:1!important}
+[data-testid="stSelectbox"] label,[data-testid="stTextInput"] label{color:#F4F8FF!important;font-weight:750!important;opacity:1!important}
+.stTabs [data-baseweb="tab-list"]{overflow-x:auto!important;gap:4px!important}
+.stTabs [data-baseweb="tab"]{white-space:nowrap!important;min-width:max-content!important;padding:.55rem .72rem!important}
+@media (max-width:1350px){
+  .block-container{padding-left:.75rem!important;padding-right:.75rem!important}
+  [data-testid="stSidebar"]{min-width:220px!important;max-width:220px!important}
+  div[data-testid="stMetric"]{min-height:105px!important;padding:12px!important}
+  div[data-testid="stMetricLabel"]{font-size:.66rem!important;line-height:1.15!important}
+  div[data-testid="stMetricValue"]{font-size:1.45rem!important}
+  .panel{padding:12px!important}
+  .panel-title{font-size:.82rem!important}
+}
+@media (max-width:1050px){
+  .history-head,.match-row{grid-template-columns:88px 54px minmax(110px,1fr) 52px 48px 10px;min-width:430px}
+  .match-date,.match-time,.opponent{font-size:.72rem!important}
+  .avatar{display:none!important}
+  .score-grid{grid-template-columns:1fr!important}
+  .first-value{font-size:1rem!important}
+}
 </style>
 ''', unsafe_allow_html=True)
 
@@ -130,8 +152,8 @@ if page in ['Dashboard','Jogadores']:
     selected=st.selectbox('Selecionar jogador',nomes,index=0);pm=player_matches(selected);ps=player_sets(selected);ss=set_summary(selected);fs=first_set_stats(selected)
     wins=int((pm['Resultado']=='Vitória').sum());losses=int((pm['Resultado']=='Derrota').sum());sets_w=int(ps['Venceu'].sum());sets_l=int((~ps['Venceu']).sum());ct,cn,max_w,max_l=streak_data(pm['Resultado'].tolist())
     st.markdown(f'<div class="hero-kicker">Análise do jogador</div><div class="hero-title">{html.escape(selected)}</div><div class="hero-sub">Histórico completo, sequência, desempenho por set e padrões automáticos.</div>',unsafe_allow_html=True)
-    c1,c2,c3,c4,c5,c6,c7,c8=st.columns(8);c1.metric('Jogos',len(pm));c2.metric('Vitórias',wins,f'{pct(wins,len(pm)):.1%}');c3.metric('Derrotas',losses,f'{pct(losses,len(pm)):.1%}');c4.metric('Sets (V/D)',f'{sets_w} / {sets_l}',f'saldo {sets_w-sets_l:+d}');c5.metric('Aproveitamento',f'{pct(wins,len(pm)):.1%}');c6.metric('Sequência atual',cn,'Vitórias' if ct=='V' else 'Derrotas');c7.metric('Melhor sequência',max_w,'Vitórias');c8.metric('Pior sequência',max_l,'Derrotas')
-    left,right=st.columns([1.35,1])
+    c1,c2,c3,c4=st.columns(4);c1.metric('Jogos',len(pm));c2.metric('Vitórias',wins,f'{pct(wins,len(pm)):.1%}');c3.metric('Derrotas',losses,f'{pct(losses,len(pm)):.1%}');c4.metric('Sets (V/D)',f'{sets_w} / {sets_l}',f'saldo {sets_w-sets_l:+d}');c5,c6,c7,c8=st.columns(4);c5.metric('Aproveitamento',f'{pct(wins,len(pm)):.1%}');c6.metric('Sequência atual',cn,'Vitórias' if ct=='V' else 'Derrotas');c7.metric('Melhor sequência',max_w,'Vitórias');c8.metric('Pior sequência',max_l,'Derrotas')
+    left,right=st.columns([1.22,1],gap='medium')
     with left:
         tabs=st.tabs(['Histórico de partidas','Resumo','Desempenho','Análises'])
         with tabs[0]:
@@ -146,7 +168,7 @@ if page in ['Dashboard','Jogadores']:
             best=ss.sort_values(['Aproveitamento','Vitórias'],ascending=False).iloc[0];worst=ss.sort_values(['Aproveitamento','Vitórias']).iloc[0]
             st.markdown(f'<div class="analysis-box"><div class="analysis-title">🧠 Análise automática</div><div class="analysis-text">O melhor desempenho de <b>{html.escape(selected)}</b> ocorre no <b>{int(best["Nº Set"])}º set</b>, com {best["Aproveitamento"]:.1%}. O pior ocorre no <b>{int(worst["Nº Set"])}º set</b>, com {worst["Aproveitamento"]:.1%}.</div></div>',unsafe_allow_html=True)
     with right:
-        r1,r2=st.columns([.82,1.18])
+        r1,r2=st.columns([.9,1.1],gap='small')
         with r1:st.markdown(f'<div class="panel"><div class="panel-title">Forma atual</div><div class="panel-sub">Últimos 10 jogos</div>{form_html(pm)}<div style="margin-top:12px;color:#91A4BC;font-size:.8rem">Sequência atual: <b style="color:#FFF">{cn} {"vitórias" if ct=="V" else "derrotas"}</b></div></div>',unsafe_allow_html=True)
         with r2:st.markdown(sets_html(ss),unsafe_allow_html=True)
         st.markdown('<div style="height:12px"></div>',unsafe_allow_html=True);st.markdown(scorelines_html(pm),unsafe_allow_html=True);st.markdown('<div style="height:12px"></div>',unsafe_allow_html=True);st.markdown(first_set_html(fs),unsafe_allow_html=True)

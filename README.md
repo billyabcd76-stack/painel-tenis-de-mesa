@@ -1,16 +1,13 @@
-# Match Intelligence v6 — Painel Profissional
+# Match Intelligence v6.1 — Correção de Visual e Responsividade
 
-Atualização baseada no layout aprovado.
+Correções aplicadas:
+- filtros e caixas de seleção totalmente opacos e legíveis
+- histórico sem corte nas colunas de placar e resultado
+- layout mais compacto para notebook e telas menores
+- cards organizados em duas linhas de quatro
+- menu lateral mais largo e textos visíveis
+- desempenho por set sem informações cortadas
+- abas com rolagem horizontal quando necessário
+- tabelas e demais telas com contraste reforçado
 
-## Inclui
-- histórico visual completo do jogador
-- data, horário, adversário, placar e resultado
-- sequência visual de vitórias e derrotas
-- cards profissionais
-- desempenho por set
-- placares mais frequentes
-- desempenho após o primeiro set
-- análise automática
-- ícones visíveis e consistentes
-
-Substitua os arquivos atuais do GitHub pelos arquivos deste pacote e faça o commit.
+Substitua os arquivos atuais do GitHub por estes arquivos e faça o commit.
