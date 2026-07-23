@@ -1,18 +1,17 @@
-# Match Intelligence v3
+# Match Intelligence v4
 
-Painel reconstruído para encontrar padrões, não apenas exibir dados.
+Versão com visual profissional baseada no dashboard de referência.
 
-## Principais análises
-- sequência atual de vitórias ou derrotas
-- maior sequência positiva e negativa
-- melhor e pior set
-- aproveitamento por número do set
-- vitórias e derrotas por placar
-- confirmação após vencer o 1º set
-- poder de virada após perder o 1º set
-- desempenho por adversário
-- histórico completo
-- comparação H2H
-- desempenho como J1 e J2
+Inclui:
+- dashboard escuro profissional
+- menu lateral completo
+- H2H rápido e completo
+- histórico de confrontos
+- análise individual
+- desempenho por set
+- sequências
+- rankings
+- jogos por data
+- base completa
 
-Substitua os arquivos atuais do repositório pelos arquivos deste pacote.
+Substitua os arquivos atuais do GitHub pelos arquivos deste pacote.
