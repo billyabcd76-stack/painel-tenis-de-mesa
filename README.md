@@ -1,18 +1,18 @@
-# Painel Pro 2.1 — Tênis de Mesa
+# Match Intelligence v3
 
-Atualização com interface mais profissional e análise mais rápida.
+Painel reconstruído para encontrar padrões, não apenas exibir dados.
 
-## Principais melhorias
+## Principais análises
+- sequência atual de vitórias ou derrotas
+- maior sequência positiva e negativa
+- melhor e pior set
+- aproveitamento por número do set
+- vitórias e derrotas por placar
+- confirmação após vencer o 1º set
+- poder de virada após perder o 1º set
+- desempenho por adversário
+- histórico completo
+- comparação H2H
+- desempenho como J1 e J2
 
-- Campo pesquisável para selecionar jogadores.
-- Comparador de duelos H2H.
-- Histórico completo entre os mesmos jogadores.
-- Médias e desempenho por set no duelo.
-- Análise individual por histórico, adversário, posição e número do set.
-- Filtros em Jogos do Dia.
-- Base oficial com somente 30 partidas.
-
-## Atualização no GitHub
-
-Substitua os arquivos atuais pelos arquivos deste projeto e faça um commit.
-O Streamlit Community Cloud atualizará o painel automaticamente.
+Substitua os arquivos atuais do repositório pelos arquivos deste pacote.
